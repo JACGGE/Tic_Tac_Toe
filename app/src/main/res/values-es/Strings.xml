@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Texts for activity_main.xml-->
+    <string name="app_name">TresEnRaya</string>
+    <string name="Title">JUEGA TRES EN RAYA</string>
+    <string name="Player1">1 Jugador</string>
+    <string name="Player2">2 Jugador</string>
+    <string name="easy_difficulty">Facil</string>
+    <string name="medium_difficulty">Normal</string>
+    <string name="impossible_difficulty">Dificil</string>
+    <!-- Texts for code -->
+    <string name="name_Player0">Sin Jugadores</string>
+    <string name="name_Player1">Jugador 1</string>
+    <string name="name_Player2">Jugador 2</string>
+    <string name="winner">EL GANADOR ES... </string>
+</resources>

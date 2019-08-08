@@ -1,7 +1,11 @@
 package com.example.tresenraya;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -80,6 +84,23 @@ public class MainActivity extends AppCompatActivity {
         mArrayJugador[0] = new Jugador(getString(R.string.name_Player0), getColor(R.color.colorJugador0), 0);
         mArrayJugador[1]= new Jugador(getString(R.string.name_Player1), getColor(R.color.colorJugador1), 1);
         mArrayJugador[2] = new Jugador(getString(R.string.name_Player2), getColor(R.color.colorJugador2), 4);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.SettingsMenu){
+            Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
+            startActivity(startSettingsActivity);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void buttonClick(View view) {

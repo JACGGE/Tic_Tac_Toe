@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Texts for main_menu.xml-->
+    <string name="settings">Settings</string>
+
     <!-- Texts for activity_main.xml-->
     <string name="app_name">TickTackToe</string>
     <string name="Title">PLAY TICK-TACK-TOE</string>
@@ -8,6 +11,7 @@
     <string name="easy_difficulty">Easy</string>
     <string name="medium_difficulty">Medium</string>
     <string name="impossible_difficulty">Hard</string>
+
     <!-- Texts for code -->
     <string name="name_Player0">No Players</string>
     <string name="name_Player1">Player 1</string>

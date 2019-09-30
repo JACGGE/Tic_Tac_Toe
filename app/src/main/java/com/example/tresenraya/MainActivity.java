@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     // ECHO Icono hacerlo y ponerlo
     // ECHO Landscape pantalla
-    // TOooooDO Prefrencias
+    // TOoooopDO Prefrencias
     // TODO Start-Up pantalla
     // TODO Inteligencia Artificial
     // TODO WIFI 2 Jugadores

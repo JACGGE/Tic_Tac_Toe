@@ -6,8 +6,7 @@
         android:id="@+id/SettingsMenu"
         android:title="@string/settings"
         app:showAsAction="never"
-        android:orderInCategory="100"
-        >
+        android:orderInCategory="100">
     </item>
 
 </menu>

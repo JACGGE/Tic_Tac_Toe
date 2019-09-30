@@ -3,9 +3,34 @@
     <!-- Texts for main_menu.xml-->
     <string name="settings">Settings</string>
 
+    <!-- - - - - - - - - - - -->
+    <!--Used by Preferences  -->
+    <!-- - - - - - - - - - - -->
+    <string name="Pla1_color_for">. . . color for Player 1</string>
+    <string name="Pla1_color_key" translatable="false">Pla1_color_key</string>
+    <string name="Pla1_color1_label">Blue</string>
+    <string name="Pla1_color1" translatable="false">1</string>
+    <string name="Pla1_color2_label">Green</string>
+    <string name="Pla1_color2" translatable="false">2</string>
+
+    <string name="Pla1_name">Player 1</string>
+    <string name="Pla1_name_key" translatable="false">Pla1_name_key</string>
+    <string name="Pla1_name_for">Name for Player 1</string>
+
+    <string name="Pla2_color_for">. . . color for Player 2</string>
+    <string name="Pla2_color_key" translatable="false">Pla2_color_key</string>
+    <string name="Pla2_color1_label">Red</string>
+    <string name="Pla2_color1" translatable="false">1</string>
+    <string name="Pla2_color2_label">Yellow</string>
+    <string name="Pla2_color2" translatable="false">2</string>
+
+    <string name="Pla2_name">Player 2</string>
+    <string name="Pla2_name_key" translatable="false">Pla2_name_key</string>
+    <string name="Pla2_name_for">Name for Player 2</string>
+
     <!-- Texts for activity_main.xml-->
     <string name="app_name">TickTackToe</string>
-    <string name="Title">PLAY TICK-TACK-TOE</string>
+    <string name="Title">TICK-TACK-TOE</string>
     <string name="Player1">1 Player</string>
     <string name="Player2">2 Player</string>
     <string name="easy_difficulty">Easy</string>

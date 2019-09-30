@@ -1,24 +1,33 @@
 package com.example.tresenraya;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v7.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    // ECHO Icono hacerlo y ponerlo
+    // ECHO Landscape pantalla
+    // TODO Prefrencias
+    // TODO Start-Up pantalla
+    // TODO Inteligencia Artificial
+    // TODO WIFI 2 Jugadores
+    // TODO Ingles comentarios
+
     // Crear variables encapsuladas para refenciar las View
     private Button mButton_1_Jugador;
     private Button mButton_2_Jugadores;
+    private Button mButton_Settings;
     private RadioButton mRadioButton_Easy;
     private RadioButton mRadioButton_Medium;
     private RadioButton mRadioButton_Impossible;
@@ -34,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Variables de uso interno
     private int mNumero_De_Jugadores;   // Numero de jugadores de la partida en uso
-    private int mDificulty;             // Grado de dificultad de la partida en uso
     private int mTurno = 0;             // Empezamos con turno "0" (nadie puede jugar)
     private int mCeldas_Libres;         // Número de celdas libres, para saber cuando se acaba
 
@@ -43,9 +51,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Referenciar las variables a las View correspondienres
+        // Referenciar las variables a las View correspondientes
         mButton_1_Jugador = findViewById(R.id.id_butoon_1player);
         mButton_2_Jugadores = findViewById(R.id.id_butoon_2players);
+        mButton_Settings = findViewById(R.id.id_butoonS);
         mRadioButton_Easy = findViewById(R.id.id_radio_button_easy_difficulty);
         mRadioButton_Medium = findViewById(R.id.id_radio_button_medium_difficulty);
         mRadioButton_Impossible = findViewById(R.id.id_radio_button_impossible_difficulty);
@@ -81,30 +90,96 @@ public class MainActivity extends AppCompatActivity {
         mArraySets[7] = new SetCeldas(mArrayCeldas[2], mArrayCeldas[4], mArrayCeldas[6]);
 
         // Rellenamos los elementos del ArrayList con referencias a los Jugadores
-        mArrayJugador[0] = new Jugador(getString(R.string.name_Player0), getColor(R.color.colorJugador0), 0);
-        mArrayJugador[1]= new Jugador(getString(R.string.name_Player1), getColor(R.color.colorJugador1), 1);
-        mArrayJugador[2] = new Jugador(getString(R.string.name_Player2), getColor(R.color.colorJugador2), 4);
+        String hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador0)));
+        mArrayJugador[0] = new Jugador(getString(R.string.name_Player0),hexColor, 0);
+
+        hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador1)));
+        mArrayJugador[1] = new Jugador(getString(R.string.name_Player1),  hexColor, 1);
+
+        hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador2)));
+        mArrayJugador[2] = new Jugador(getString(R.string.name_Player2),hexColor, 4);
+
+        restaurarCampos(savedInstanceState);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.SettingsMenu){
-            Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
-            startActivity(startSettingsActivity);
-            return true;
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int[] ArrayProp = new int[9];
+        int[] ArrayValor = new int[9];
+        for (int n = 0; n < 9; n++) {
+            ArrayProp[n] = mArrayCeldas[n].getPropietario();
+            ArrayValor[n] = mArrayCeldas[n].getValor();
         }
-        return super.onOptionsItemSelected(item);
+        outState.putIntArray("PROPS", ArrayProp);
+        outState.putIntArray("VALOR", ArrayValor);
+        outState.putBoolean("ENB1", mButton_1_Jugador.isEnabled());
+        outState.putInt("NUMJUG", mNumero_De_Jugadores);
+        outState.putInt("TURNO", mTurno);
+        outState.putInt("CELFREE", mCeldas_Libres);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mArrayJugador[1].setName(sharedPreferences.getString(getString(R.string.Pla1_name_key), "No leido"));
+        mArrayJugador[2].setName(sharedPreferences.getString(getString(R.string.Pla2_name_key), "No leido"));
+        int col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla1_color_key),"1"));
+        String hexColor1 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador1)));
+        String hexColor3 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador3)));
+        if (col == 1 ){
+            mArrayJugador[1].setMcolor(hexColor1);
+        }else if (col == 2){
+            mArrayJugador[1].setMcolor(hexColor3);
+        }
+        col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla2_color_key),"1"));
+        String hexColor2 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador2)));
+        String hexColor4 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador4)));
+        if (col == 1 ){
+            mArrayJugador[2].setMcolor(hexColor2);
+        }else if (col == 2){
+            mArrayJugador[2].setMcolor(hexColor4);
+        }
+    }
+
+    private void restaurarCampos(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            int[] ArrayProp = new int[9];
+            ArrayProp = savedInstanceState.getIntArray("PROPS");
+            int[] ArrayValor = new int[9];
+            ArrayValor = savedInstanceState.getIntArray("VALOR");
+            for (int n = 0; n < 9; n++) {
+                mArrayCeldas[n].setPropietario(ArrayProp[n]);
+                mArrayCeldas[n].setValor(ArrayValor[n]);
+                ponerColorEnCelda(mArrayCeldas[n]);
+            }
+            enabled_buttons(savedInstanceState.getBoolean("ENB1", true));
+            mNumero_De_Jugadores = savedInstanceState.getInt("NUMJUG", 1);
+            mTurno = savedInstanceState.getInt("TURNO", 1);
+            mCeldas_Libres = savedInstanceState.getInt("CELFREE", 9);
+        }
     }
 
     public void buttonClick(View view) {
-        // Asignar el numero de jugadores "mNumero_De_Jugadores segun boton pulsado"
+        if (view.getId() == mButton_Settings.getId()) {
+            Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
+            startActivity(startSettingsActivity);
+            return;
+        }
         mNumero_De_Jugadores = 1;
         if (view.getId() == mButton_2_Jugadores.getId()) mNumero_De_Jugadores = 2;
         // Inabilitar los botones y los radio_botones
@@ -113,22 +188,26 @@ public class MainActivity extends AppCompatActivity {
         for (Celda celda : mArrayCeldas) {
             celda.setPropietario(0);
             celda.setValor(0);
-            ponerColorEnCelda(celda);}
+            ponerColorEnCelda(celda);
+        }
         // Asignar el turno al jugador 1 e inicializar nemero de celdas libres
         mTurno = 1;
         mCeldas_Libres = 9;
     }
 
     public void ponerColorEnCelda(Celda celda) {
-        celda.getImageView().setBackgroundColor(mArrayJugador[celda.getPropietario()].getMcolor());
+        //String colJug = mArrayJugador[celda.getPropietario()].getMcolor();
+        celda.getImageView().setBackgroundColor(Color.parseColor( mArrayJugador[celda.getPropietario()].getMcolor()));
     }
 
     public void enabled_buttons(boolean enabled) {
         mButton_1_Jugador.setEnabled(enabled);
         mButton_2_Jugadores.setEnabled(enabled);
-        mRadioButton_Easy.setClickable(enabled);
-        mRadioButton_Medium.setClickable(enabled);
-        mRadioButton_Impossible.setClickable(enabled);
+        mButton_Settings.setEnabled(enabled);
+        mRadioButton_Easy.setEnabled(enabled);
+        mRadioButton_Easy.setEnabled(enabled);
+        mRadioButton_Medium.setEnabled(enabled);
+        mRadioButton_Impossible.setEnabled(enabled);
     }
 
     public void juegaEnCelda(Celda celda) {
@@ -144,64 +223,83 @@ public class MainActivity extends AppCompatActivity {
     public void casilla_pulsada(View view) {
         if (mTurno != 0) {
             int index = Integer.valueOf(view.getTag().toString());
-            juegaEnCelda(mArrayCeldas[index]);}
+            juegaEnCelda(mArrayCeldas[index]);
+        }
     }
 
     public void maquina_juega() {
         Celda celda = busca_mejor_celda_para_maquina();
-          if (celda == null) {
-            do {}
+        if (celda == null) {
+            do {
+            }
             while
-            ((celda = mArrayCeldas[new Random().nextInt(9)]).getPropietario() != 0);}
+            ((celda = mArrayCeldas[new Random().nextInt(9)]).getPropietario() != 0);
+        }
         juegaEnCelda(celda);
     }
 
     public void celdas_libres() {
         mCeldas_Libres--;
-        if (mCeldas_Libres < 1){
+        if (mCeldas_Libres < 1) {
             mCeldas_Libres = 0;
             mTurno = 0;
-            enabled_buttons(true);}
+            enabled_buttons(true);
+        }
     }
 
     public void cambio_de_turno() {
         mTurno++;
         if (mTurno > 2) mTurno = 1;
         if (mTurno == 2 && mNumero_De_Jugadores == 1) {
-            maquina_juega();}
+            maquina_juega();
+        }
     }
 
     public void comprueba_si_ganador() {
         for (int n = 0; n < mArraySets.length; n++) {
-            for (int jugador = 1; jugador < 3; jugador ++) {
-                if (mArraySets[n].getSuma() == mArrayJugador[jugador].mValor * 3) {
+            for (int jugador = 1; jugador < 3; jugador++) {
+                if (mArraySets[n].getSuma() == mArrayJugador[jugador].getMvalor() * 3) {
                     Toast.makeText(this, getString(R.string.winner)
                             + mArrayJugador[jugador].getName(), Toast.LENGTH_LONG).show();
                     mCeldas_Libres = 0;
-                    break;}}}
+                    break;
+                }
+            }
+        }
     }
 
-    public Celda busca_mejor_celda_para_maquina(){
+    public Celda busca_mejor_celda_para_maquina() {
         int inicio = 1;
-        if (!mRadioButton_Easy.isChecked())inicio = 2;
+        if (!mRadioButton_Easy.isChecked()) inicio = 2;
         for (int jugador = inicio; jugador > 0; jugador--) {
             for (int n = 0; n < mArraySets.length; n++) {
-                if (mArraySets[n].getSuma() == mArrayJugador[jugador].mValor * 2) {
+                if (mArraySets[n].getSuma() == mArrayJugador[jugador].getMvalor() * 2) {
                     for (int m = 0; m < mArraySets[n].getArrayCeldasEnSet().length; m++) {
                         if (mArraySets[n].getCeldaEnSet(m).getPropietario() == 0) {
-                            return mArraySets[n].getCeldaEnSet(m);}}}}}
+                            return mArraySets[n].getCeldaEnSet(m);
+                        }
+                    }
+                }
+            }
+        }
 
-        // TODO SI NINGUNA DE LAS ANTERIORES, BUSCA LA CELDA VACIA CON MAS PESO Y LA OCUPA
+        // SI NINGUNA DE LAS ANTERIORES, BUSCA LA CELDA VACIA CON MAS PESO Y LA OCUPA
         Celda celda = null;
         if (!mRadioButton_Impossible.isChecked()) return celda;
         int maxPeso = 0;
         int inicia = new Random().nextInt(8);
-        int m ;
-        for (int n = inicia; n < inicia +9; n++) {
-            if ( n < 9){m = n;}else{m = n % 8;}
-            if (mArrayCeldas[m].getPropietario() == 0 && mArrayCeldas[m].getPeso() > maxPeso){
+        int m;
+        for (int n = inicia; n < inicia + 9; n++) {
+            if (n < 9) {
+                m = n;
+            } else {
+                m = n % 8;
+            }
+            if (mArrayCeldas[m].getPropietario() == 0 && mArrayCeldas[m].getPeso() > maxPeso) {
                 maxPeso = mArrayCeldas[m].getPeso();
-                celda = mArrayCeldas[m];}}
+                celda = mArrayCeldas[m];
+            }
+        }
         return celda;
     }
 }

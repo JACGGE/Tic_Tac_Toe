@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:baselineAligned="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorFondo"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/id_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="@string/Title"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/id_butoon_1player"
+            style="@style/Buttons"
+            android:text="@string/Player1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/id_butoonS"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_vertical"
+                android:text="S"
+                style="@style/Buttons"
+                android:textSize="10sp"/>
+
+            <RadioGroup
+            android:id="@+id/buttonS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <RadioButton
+                android:id="@+id/id_radio_button_easy_difficulty"
+                style="@style/RadioButon"
+                android:checked="true"
+                android:text="@string/easy_difficulty" />
+
+            <RadioButton
+                android:id="@+id/id_radio_button_medium_difficulty"
+                style="@style/RadioButon"
+                android:checked="false"
+                android:text="@string/medium_difficulty" />
+
+            <RadioButton
+                android:id="@+id/id_radio_button_impossible_difficulty"
+                style="@style/RadioButon"
+                android:checked="false"
+                android:text="@string/impossible_difficulty" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/id_butoon_2players"
+            style="@style/Buttons"
+            android:text="@string/Player2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dp"
+        android:layout_weight="4"
+        android:paddingBottom="10dp">
+
+
+        <GridLayout
+            android:id="@+id/id_grid"
+            android:background="@color/colorFondoGrid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:columnCount="3"
+            android:rowCount="3">
+
+            <ImageView
+                android:id="@+id/id_iv_a1"
+                style="@style/Image"
+                android:background="@color/colorJugador2"
+                android:tag="0" />
+                <!--En las tag almacenamos indice de celda (0-9)-->
+
+            <ImageView
+                android:id="@+id/id_iv_a2"
+                style="@style/Image"
+                android:tag="1" />
+
+            <ImageView
+                android:id="@+id/id_iv_a3"
+                style="@style/Image"
+                android:background="@color/colorJugador2"
+                android:tag="2" />
+
+            <ImageView
+                android:id="@+id/id_iv_b1"
+                style="@style/Image"
+                android:background="@color/colorJugador1"
+                android:tag="3" />
+
+            <ImageView
+                android:id="@+id/id_iv_b2"
+                style="@style/Image"
+                android:tag="4" />
+
+            <ImageView
+                android:id="@+id/id_iv_b3"
+                style="@style/Image"
+                android:tag="5" />
+
+            <ImageView
+                android:id="@+id/id_iv_c1"
+                style="@style/Image"
+                android:tag="6" />
+
+            <ImageView
+                android:id="@+id/id_iv_c2"
+                style="@style/Image"
+                android:background="@color/colorJugador2"
+                android:tag="7" />
+
+            <ImageView
+                android:id="@+id/id_iv_c3"
+                style="@style/Image"
+                android:background="@color/colorJugador2"
+                android:tag="8" />
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

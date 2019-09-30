@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <EditTextPreference
+        android:key="@string/Pla1_name_key"
+        android:defaultValue="@string/Pla1_name"
+        android:title="@string/Pla1_name_for"/>
+
+    <ListPreference
+        android:key="@string/Pla1_color_key"
+        android:defaultValue="@string/Pla1_color1"
+        android:title="@string/Pla1_color_for"
+        android:entries="@array/Pla1_color_options"
+        android:entryValues="@array/Pla1_color_values"/>
+
+    <EditTextPreference
+        android:key="@string/Pla2_name_key"
+        android:defaultValue="@string/Pla2_name"
+        android:title="@string/Pla2_name_for"/>
+
+    <ListPreference
+        android:key="@string/Pla2_color_key"
+        android:defaultValue="@string/Pla2_color1"
+        android:title="@string/Pla2_color_for"
+        android:entries="@array/Pla2_color_options"
+        android:entryValues="@array/Pla2_color_values"/>
+
+
 </PreferenceScreen>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="Pla1_color_options">
+        <item>@string/Pla1_color1_label</item>
+        <item>@string/Pla1_color2_label</item>
+    </string-array>
+
+    <string-array name="Pla1_color_values">
+        <item>@string/Pla1_color1</item>
+        <item>@string/Pla1_color2</item>
+    </string-array>
+
+    <string-array name="Pla2_color_options">
+        <item>@string/Pla2_color1_label</item>
+        <item>@string/Pla2_color2_label</item>
+    </string-array>
+
+    <string-array name="Pla2_color_values">
+        <item>@string/Pla2_color1</item>
+        <item>@string/Pla2_color2</item>
+    </string-array>
+
+ </resources>

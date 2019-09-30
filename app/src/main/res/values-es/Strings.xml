@@ -3,9 +3,24 @@
     <!-- Texts for main_menu.xml-->
     <string name="settings">Configuración</string>
 
-    <!-- Texts for activity_main.xml-->
+    <!-- Texts for settings-->
+    <string name="Pla1_name">Jugador 1</string>
+    <string name="Pla1_name_for">Nombre para Jugador 1</string>
+
+    <string name="Pla1_color_for">. . . Color para jugador 1</string>
+    <string name="Pla1_color1_label">Azul</string>
+    <string name="Pla1_color2_label">Green</string>
+
+    <string name="Pla2_name">Jugador 2</string>
+    <string name="Pla2_name_for">Nombre para Jugador 2</string>
+
+    <string name="Pla2_color_for">. . . Color para jugador 2</string>
+    <string name="Pla2_color1_label">Rojo</string>
+    <string name="Pla2_color2_label">Amarillo</string>
+
+
     <string name="app_name">TresEnRaya</string>
-    <string name="Title">JUEGA TRES EN RAYA</string>
+    <string name="Title">TRES EN RAYA</string>
     <string name="Player1">1 Jugador</string>
     <string name="Player2">2 Jugador</string>
     <string name="easy_difficulty">Facil</string>

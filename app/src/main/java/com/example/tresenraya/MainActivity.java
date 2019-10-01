@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     // TODO WIFI 2 Jugadores
     // TODO Ingles comentarios
 
-    // Crear variables encapsuladas para refenciar las View
+    // Create encapsulated variables to reference the Views
     private Button mButton_1_Jugador;
     private Button mButton_2_Jugadores;
     private Button mButton_Settings;
@@ -31,26 +31,26 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton mRadioButton_Medium;
     private RadioButton mRadioButton_Impossible;
 
-    // Crear Array de objetos de la clase Celda
+    // Create Object array of the Celda class
     private Celda[] mArrayCeldas = new Celda[9];
 
-    // Crear ArrayList de objetos de la clase SetCeldas
+    // Create Object array of the SetCeldas class
     private SetCeldas[] mArraySets = new SetCeldas[8];
 
-    // Crear Array de objetos de la clase Jugador
+    // Create Object array of the Jugador class
     private Jugador[] mArrayJugador = new Jugador[3];
 
-    // Variables de uso interno
-    private int mNumero_De_Jugadores;   // Numero de jugadores de la partida en uso
-    private int mTurno = 0;             // Empezamos con turno "0" (nadie puede jugar)
-    private int mCeldas_Libres;         // Número de celdas libres, para saber cuando se acaba
+    // Internal use variables
+    private int mNumero_De_Jugadores;   // Number of players of the game in use
+    private int mTurno = 0;             // We start with turn "0" (nobody can play)
+    private int mCeldas_Libres;         // Number of free cells, to know when the game is over
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Referenciar las variables a las View correspondientes
+        // We refer to the encapsulated variables to the corresponding View
         mButton_1_Jugador = findViewById(R.id.id_butoon_1player);
         mButton_2_Jugadores = findViewById(R.id.id_butoon_2players);
         mButton_Settings = findViewById(R.id.id_butoonS);
@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         mRadioButton_Medium = findViewById(R.id.id_radio_button_medium_difficulty);
         mRadioButton_Impossible = findViewById(R.id.id_radio_button_impossible_difficulty);
 
-        // Rellenamos los elementos del ArrayList con referencias a las celdas
-        // Creamos las celdas en la misma linea
+        // We fill the elements of the cell array with references to the cells
+        // We create the cells in the same line
         mArrayCeldas[0] = new Celda((ImageView) findViewById(R.id.id_iv_a1), 3);
         mArrayCeldas[1] = new Celda((ImageView) findViewById(R.id.id_iv_a2), 2);
         mArrayCeldas[2] = new Celda((ImageView) findViewById(R.id.id_iv_a3), 3);
@@ -72,23 +72,23 @@ public class MainActivity extends AppCompatActivity {
         mArrayCeldas[7] = new Celda((ImageView) findViewById(R.id.id_iv_c2), 2);
         mArrayCeldas[8] = new Celda((ImageView) findViewById(R.id.id_iv_c3), 3);
 
-        // Creamos los set de celdas con referencias a las celdas
+        // We create the cell sets with references to the cells
 
-        // Sets para las filas 0, 1 y 2
+        // Sets for the rows 0, 1 y 2
         mArraySets[0] = new SetCeldas(mArrayCeldas[0], mArrayCeldas[1], mArrayCeldas[2]);
         mArraySets[1] = new SetCeldas(mArrayCeldas[3], mArrayCeldas[4], mArrayCeldas[5]);
         mArraySets[2] = new SetCeldas(mArrayCeldas[6], mArrayCeldas[7], mArrayCeldas[8]);
 
-        // Sets para las columnas  0, 1 y 2
+        // Sets for the columns  0, 1 y 2
         mArraySets[3] = new SetCeldas(mArrayCeldas[0], mArrayCeldas[3], mArrayCeldas[6]);
         mArraySets[4] = new SetCeldas(mArrayCeldas[1], mArrayCeldas[4], mArrayCeldas[7]);
         mArraySets[5] = new SetCeldas(mArrayCeldas[2], mArrayCeldas[5], mArrayCeldas[8]);
 
-        // Sets para las diagonales 0 y 1
+        // Sets for diagonals 0 y 1
         mArraySets[6] = new SetCeldas(mArrayCeldas[0], mArrayCeldas[4], mArrayCeldas[8]);
         mArraySets[7] = new SetCeldas(mArrayCeldas[2], mArrayCeldas[4], mArrayCeldas[6]);
 
-        // Rellenamos los elementos del ArrayList con referencias a los Jugadores
+        // We fill in the elements of the PlayersArray
         String hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador0)));
         mArrayJugador[0] = new Jugador(getString(R.string.name_Player0),hexColor, 0);
 

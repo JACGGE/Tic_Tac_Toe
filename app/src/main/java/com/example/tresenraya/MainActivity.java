@@ -3,7 +3,6 @@ package com.example.tresenraya;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
@@ -196,8 +195,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ponerColorEnCelda(Celda celda) {
-        //String colJug = mArrayJugador[celda.getPropietario()].getMcolor();
-        celda.getImageView().setBackgroundColor(Color.parseColor( mArrayJugador[celda.getPropietario()].getMcolor()));
+        String colJug = mArrayJugador[celda.getPropietario()].getMcolor();
+        celda.getImageView().setBackgroundColor(Color.parseColor(colJug));
     }
 
     public void enabled_buttons(boolean enabled) {

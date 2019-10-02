@@ -24,56 +24,41 @@ public class MainActivity extends AppCompatActivity {
     // TODO WIFI 2 Players
     // TODO Ingles comentarios
 
-    // ********************************************************************************
-    // Create variables to reference the Views
-    // ********************************************************************************
+/***************************************************************************************************
+ *  Create variables to reference the Views
+***************************************************************************************************/
     private Button mButton_1_Player;
     private Button mButton_2_Player;
     private Button mButton_Settings;
     private RadioButton mRadioButton_Easy;
     private RadioButton mRadioButton_Medium;
     private RadioButton mRadioButton_Impossible;
-    // ********************************************************************************
-    // ********************************************************************************
 
 
-
-    // ********************************************************************************
-    // Create Object array of the cell class
-    // ********************************************************************************
+/***************************************************************************************************
+ *  Create Object array of the cell class
+***************************************************************************************************/
     private Cell[] mArrayCells = new Cell[9];
-    // ********************************************************************************
-    // ********************************************************************************
 
 
-
-    // ********************************************************************************
-    // Create Object array of the SetCells class
-    // ********************************************************************************
+/***************************************************************************************************
+ *  Create Object array of the SetCells class
+***************************************************************************************************/
     private SetCells[] mArraySets = new SetCells[8];
-    // ********************************************************************************
-    // ********************************************************************************
 
 
-
-    // ********************************************************************************
-    // Create Object array of the Player class
-    // ********************************************************************************
+/***************************************************************************************************
+ *  Create Object array of the Player class
+***************************************************************************************************/
     private Player[] mArrayPlayer = new Player[3];
-    // ********************************************************************************
-    // ********************************************************************************
 
 
-
-    // ********************************************************************************
-    // Internal use variables
-    // ********************************************************************************
+/***************************************************************************************************
+ *  Internal use variables
+***************************************************************************************************/
     private int Number_Of_Playeres;  // Number of players of the game in use
     private int Turn = 0;            // We start with turn "0" (nobody can play)
     private int vacant_Cells;        // Number of free cells, to know when the game is over
-    // ********************************************************************************
-    // ********************************************************************************
-
 
 
     @Override
@@ -81,24 +66,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // ********************************************************************************
-        // We match the variables to the corresponding View
-        // ********************************************************************************
+/***************************************************************************************************
+ *      We match the variables to the corresponding View
+***************************************************************************************************/
         mButton_1_Player = findViewById(R.id.id_butoon_1player);
         mButton_2_Player = findViewById(R.id.id_butoon_2players);
         mButton_Settings = findViewById(R.id.id_butoonS);
         mRadioButton_Easy = findViewById(R.id.id_radio_button_easy_difficulty);
         mRadioButton_Medium = findViewById(R.id.id_radio_button_medium_difficulty);
         mRadioButton_Impossible = findViewById(R.id.id_radio_button_impossible_difficulty);
-        // ********************************************************************************
-        // ********************************************************************************
 
 
-
-        // ********************************************************************************
-        // We fill the elements of the mArrayCells with references to the cells
-        // We create the cells in the same line
-        // ********************************************************************************
+/***************************************************************************************************
+ *      We fill the elements of the mArrayCells with references to the cells
+ *      We create the cells in the same line
+***************************************************************************************************/
         mArrayCells[0] = new Cell((ImageView) findViewById(R.id.id_iv_a1), 3);
         mArrayCells[1] = new Cell((ImageView) findViewById(R.id.id_iv_a2), 2);
         mArrayCells[2] = new Cell((ImageView) findViewById(R.id.id_iv_a3), 3);
@@ -110,47 +92,35 @@ public class MainActivity extends AppCompatActivity {
         mArrayCells[6] = new Cell((ImageView) findViewById(R.id.id_iv_c1), 3);
         mArrayCells[7] = new Cell((ImageView) findViewById(R.id.id_iv_c2), 2);
         mArrayCells[8] = new Cell((ImageView) findViewById(R.id.id_iv_c3), 3);
-        // ********************************************************************************
-        // ********************************************************************************
 
 
-
-        // ********************************************************************************
-        // We create the SetCells with references to the cells that make up the set
-        // Sets for the rows 0, 1 y 2
-        // ********************************************************************************
+/***************************************************************************************************
+ *      We create the SetCells with references to the cells that make up the set
+ *      Sets for the rows 0, 1 y 2
+***************************************************************************************************/
         mArraySets[0] = new SetCells(mArrayCells[0], mArrayCells[1], mArrayCells[2]);
         mArraySets[1] = new SetCells(mArrayCells[3], mArrayCells[4], mArrayCells[5]);
         mArraySets[2] = new SetCells(mArrayCells[6], mArrayCells[7], mArrayCells[8]);
-        // ********************************************************************************
-        // ********************************************************************************
 
 
-
-        // ********************************************************************************
-        // Sets for the columns  0, 1 y 2
-        // ********************************************************************************
+/***************************************************************************************************
+ *      Sets for the columns  0, 1 y 2
+***************************************************************************************************/
         mArraySets[3] = new SetCells(mArrayCells[0], mArrayCells[3], mArrayCells[6]);
         mArraySets[4] = new SetCells(mArrayCells[1], mArrayCells[4], mArrayCells[7]);
         mArraySets[5] = new SetCells(mArrayCells[2], mArrayCells[5], mArrayCells[8]);
-        // ********************************************************************************
-        // ********************************************************************************
 
 
-
-        // ********************************************************************************
-        // Sets for diagonals 0 y 1
-        // ********************************************************************************
+/***************************************************************************************************
+ *      Sets for diagonals 0 y 1
+***************************************************************************************************/
         mArraySets[6] = new SetCells(mArrayCells[0], mArrayCells[4], mArrayCells[8]);
         mArraySets[7] = new SetCells(mArrayCells[2], mArrayCells[4], mArrayCells[6]);
-        // ********************************************************************************
-        // ********************************************************************************
 
 
-
-        // ********************************************************************************
-        // We fill in the elements of the PlayersArray
-        // ********************************************************************************
+/***************************************************************************************************
+ *      We fill in the elements of the PlayersArray
+***************************************************************************************************/
         String hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer0)));
         mArrayPlayer[0] = new Player(getString(R.string.name_Player0), hexColor, 0);
 
@@ -159,13 +129,11 @@ public class MainActivity extends AppCompatActivity {
 
         hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer2)));
         mArrayPlayer[2] = new Player(getString(R.string.name_Player2), hexColor, 4);
-        // ********************************************************************************
-        // ********************************************************************************
 
 
-        // ********************************************************************************
-        // Recharge of variables and arrays when returning from a deletion due to UI change
-        // ********************************************************************************
+/***************************************************************************************************
+ *      Recharge of variables and arrays when returning from a deletion due to UI change
+***************************************************************************************************/
         if (savedInstanceState != null) {
             int[] ArrayOwner = new int[9];
             ArrayOwner = savedInstanceState.getIntArray(getString(R.string.Owner));
@@ -181,14 +149,12 @@ public class MainActivity extends AppCompatActivity {
             Turn = savedInstanceState.getInt(getString(R.string.Turn), 1);
             vacant_Cells = savedInstanceState.getInt(getString(R.string.VacantCells), 9);
         }
-        // **********************************************************************
-        // **********************************************************************
-    }
+         }
 
 
-    // ********************************************************************************
-    // Storage of variables and arrays when a deletion due to UI change is about
-    // ********************************************************************************
+/***************************************************************************************************
+ *  Storage of variables and arrays when a deletion due to UI change is about
+***************************************************************************************************/
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -205,11 +171,11 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(getString(R.string.Turn), Turn);
         outState.putInt(getString(R.string.VacantCells), vacant_Cells);
     }
-    // ********************************************************************************
-    // ********************************************************************************
 
 
-
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     @Override
     protected void onResume() {
         super.onResume();
@@ -233,20 +199,24 @@ public class MainActivity extends AppCompatActivity {
         String hexColor1 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer1)));
         String hexColor3 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer3)));
         if (col == 1) {
-            mArrayPlayer[1].setMcolor(hexColor1);
+            mArrayPlayer[1].setColor(hexColor1);
         } else if (col == 2) {
-            mArrayPlayer[1].setMcolor(hexColor3);
+            mArrayPlayer[1].setColor(hexColor3);
         }
         col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla2_color_key), "1"));
         String hexColor2 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer2)));
         String hexColor4 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer4)));
         if (col == 1) {
-            mArrayPlayer[2].setMcolor(hexColor2);
+            mArrayPlayer[2].setColor(hexColor2);
         } else if (col == 2) {
-            mArrayPlayer[2].setMcolor(hexColor4);
+            mArrayPlayer[2].setColor(hexColor4);
         }
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public void buttonClick(View view) {
         if (view.getId() == mButton_Settings.getId()) {
             Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
@@ -268,11 +238,19 @@ public class MainActivity extends AppCompatActivity {
         vacant_Cells = 9;
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public void putColorToCell(Cell Cell) {
-        String colJug = mArrayPlayer[Cell.getOwner()].getMcolor();
+        String colJug = mArrayPlayer[Cell.getOwner()].getColor();
         Cell.getImageView().setBackgroundColor(Color.parseColor(colJug));
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public void enabled_buttons(boolean enabled) {
         mButton_1_Player.setEnabled(enabled);
         mButton_2_Player.setEnabled(enabled);
@@ -283,16 +261,24 @@ public class MainActivity extends AppCompatActivity {
         mRadioButton_Impossible.setEnabled(enabled);
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public void juegaEnCell(Cell Cell) {
         if (Cell == null || Cell.getOwner() != 0 || Turn == 0) return;
         Cell.setOwner(Turn);
-        Cell.setValue(mArrayPlayer[Turn].getmValue());
+        Cell.setValue(mArrayPlayer[Turn].getValue());
         putColorToCell(Cell);
         comprueba_si_ganador();
         Cells_libres();
         cambio_de_turno();
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public void casilla_pulsada(View view) {
         if (Turn != 0) {
             int index = Integer.valueOf(view.getTag().toString());
@@ -300,6 +286,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public void maquina_juega() {
         Cell Cell = busca_mejor_Cell_para_maquina();
         if (Cell == null) {
@@ -311,6 +301,10 @@ public class MainActivity extends AppCompatActivity {
         juegaEnCell(Cell);
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public void Cells_libres() {
         vacant_Cells--;
         if (vacant_Cells < 1) {
@@ -320,6 +314,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public void cambio_de_turno() {
         Turn++;
         if (Turn > 2) Turn = 1;
@@ -328,10 +326,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public void comprueba_si_ganador() {
         for (int n = 0; n < mArraySets.length; n++) {
             for (int Player = 1; Player < 3; Player++) {
-                if (mArraySets[n].getSuma() == mArrayPlayer[Player].getmValue() * 3) {
+                if (mArraySets[n].getSuma() == mArrayPlayer[Player].getValue() * 3) {
                     Toast.makeText(this, getString(R.string.winner)
                             + mArrayPlayer[Player].getName(), Toast.LENGTH_LONG).show();
                     vacant_Cells = 0;
@@ -341,12 +343,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+/***************************************************************************************************
+ *
+***************************************************************************************************/
     public Cell busca_mejor_Cell_para_maquina() {
         int inicio = 1;
         if (!mRadioButton_Easy.isChecked()) inicio = 2;
         for (int Player = inicio; Player > 0; Player--) {
             for (int n = 0; n < mArraySets.length; n++) {
-                if (mArraySets[n].getSuma() == mArrayPlayer[Player].getmValue() * 2) {
+                if (mArraySets[n].getSuma() == mArrayPlayer[Player].getValue() * 2) {
                     for (int m = 0; m < mArraySets[n].getArrayCellsEnSet().length; m++) {
                         if (mArraySets[n].getCellEnSet(m).getOwner() == 0) {
                             return mArraySets[n].getCellEnSet(m);

@@ -1,3 +1,15 @@
+/***************************************************************************************************
+ * This class will create Cell objects, corresponding to each of the cells on the game board
+ * Each of the cells contains the following member properties
+ * mImageView -> Store the ImageView of each cell, whose color will be changed
+ *              with setBackgroundColo
+ * mOwner     -> Here it is saved who was the player who took the cell
+ *              (0-Vacant cell / 1-Player 1 / 2-Player 2
+ * mWeight    -> The weight of a cell represents the number of winning combinations
+ *              in which it can participate
+ * mValue     ->
+***************************************************************************************************/
+
 package com.example.tresenraya;
 
 import android.widget.ImageView;
@@ -15,22 +27,11 @@ public class Cell {
         mValue = 0;
     }
 
-    public int getValue() {
-        return mValue;
-    }
-
-    public void setValue(int value) {mValue = value;}
-
-    public ImageView getImageView() {return mImageView;}
-
-    public int getOwner() {return mOwner;}
-
-    public void setOwner(int turn) {mOwner = turn;}
-
-    public int getWeigth() {return mWeight;}
-
-    public void setWeigth(int weigth) {
-        mWeight = weigth;
-    }
+    int getValue() {return mValue;}
+    void setValue(int value) {mValue = value;}
+    ImageView getImageView() {return mImageView;}
+    int getOwner() {return mOwner;}
+    void setOwner(int turn) {mOwner = turn;}
+    int getWeigth() {return mWeight;}
 }
 

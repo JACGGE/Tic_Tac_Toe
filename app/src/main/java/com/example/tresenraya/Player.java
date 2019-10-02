@@ -11,27 +11,13 @@ public class Player {
         mValue = valor;
     }
 
-    public String getName() {
-        return mName;
-    }
-
-    public void setName(String name) {
+    String getName() {return mName;}
+    void setName(String name) {
         mName = name;
     }
-
-    public String getMcolor() {
-        return mColor;
-    }
-
-    public void setMcolor(String color) {
-        mColor = color;
-    }
-
-    public int getmValue() {
+    String getColor() {return mColor;}
+    void setColor(String color) {mColor = color;}
+    int getValue() {
         return mValue;
-    }
-
-    public void setmValue(int mValue) {
-        this.mValue = mValue;
     }
 }

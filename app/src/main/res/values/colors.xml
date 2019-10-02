@@ -7,11 +7,11 @@
     <color name="startColorButton">#8888FF</color>
     <color name="endColorButton">#000077</color>
 
-    <color name="colorJugador0">#000000</color>
-    <color name="colorJugador1">#0000FF</color>
-    <color name="colorJugador2">#FF0000</color>
-    <color name="colorJugador3">#207800</color>
-    <color name="colorJugador4">#FFc000</color>
+    <color name="colorPlayer0">#000000</color>
+    <color name="colorPlayer1">#0000FF</color>
+    <color name="colorPlayer2">#FF0000</color>
+    <color name="colorPlayer3">#207800</color>
+    <color name="colorPlayer4">#FFc000</color>
 
     <color name="colorFondo">#000000</color>
     <color name="colorFondoGrid">#FFFFFF</color>

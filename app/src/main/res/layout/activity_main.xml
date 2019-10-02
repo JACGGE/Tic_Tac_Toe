@@ -20,7 +20,7 @@
             android:id="@+id/id_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="35dp"
             android:layout_marginBottom="20dp"
             android:padding="5dp"
             android:text="@string/Title"
@@ -116,9 +116,9 @@
                 <ImageView
                     android:id="@+id/id_iv_a1"
                     style="@style/Image"
-                    android:background="@color/colorJugador2"
+                    android:background="@color/colorPlayer2"
                     android:tag="0" />
-                <!--En las tag almacenamos indice de celda (0-9)-->
+                <!--En las tag almacenamos indice de Cell (0-9)-->
 
                 <ImageView
                     android:id="@+id/id_iv_a2"
@@ -128,13 +128,13 @@
                 <ImageView
                     android:id="@+id/id_iv_a3"
                     style="@style/Image"
-                    android:background="@color/colorJugador2"
+                    android:background="@color/colorPlayer2"
                     android:tag="2" />
 
                 <ImageView
                     android:id="@+id/id_iv_b1"
                     style="@style/Image"
-                    android:background="@color/colorJugador1"
+                    android:background="@color/colorPlayer1"
                     android:tag="3" />
 
                 <ImageView
@@ -155,13 +155,13 @@
                 <ImageView
                     android:id="@+id/id_iv_c2"
                     style="@style/Image"
-                    android:background="@color/colorJugador2"
+                    android:background="@color/colorPlayer2"
                     android:tag="7" />
 
                 <ImageView
                     android:id="@+id/id_iv_c3"
                     style="@style/Image"
-                    android:background="@color/colorJugador2"
+                    android:background="@color/colorPlayer2"
                     android:tag="8" />
 
             </GridLayout>

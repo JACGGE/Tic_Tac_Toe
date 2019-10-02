@@ -6,6 +6,14 @@
     <!-- - - - - - - - - - - -->
     <!--Used by Preferences  -->
     <!-- - - - - - - - - - - -->
+
+    <string name="Owner" translatable="false">"OWNER"</string>
+    <string name="Value" translatable="false">"VALUE"</string>
+    <string name="IsButtonsEnabled" translatable="false">"IS_BUTTONS_ENABLED"</string>
+    <string name="NumberOfPlayers" translatable="false">"NUMBER_OF_PLAYERS"</string>
+    <string name="Turn" translatable="false">"TURN"</string>
+    <string name="VacantCells" translatable="false">"VACANT_CELLS"</string>
+
     <string name="Pla1_color_for">. . . color for Player 1</string>
     <string name="Pla1_color_key" translatable="false">Pla1_color_key</string>
     <string name="Pla1_color1_label">Blue</string>

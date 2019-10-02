@@ -11,112 +11,204 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     // ECHO Icono hacerlo y ponerlo
     // ECHO Landscape pantalla
-    // CASI Prefrencias
+    // ECHO Prefrencias
     // TODO Start-Up pantalla
     // TODO Inteligencia Artificial
-    // TODO WIFI 2 Jugadores
+    // TODO WIFI 2 Players
     // TODO Ingles comentarios
 
-    // Create encapsulated variables to reference the Views
-    private Button mButton_1_Jugador;
-    private Button mButton_2_Jugadores;
+    // ********************************************************************************
+    // Create variables to reference the Views
+    // ********************************************************************************
+    private Button mButton_1_Player;
+    private Button mButton_2_Player;
     private Button mButton_Settings;
     private RadioButton mRadioButton_Easy;
     private RadioButton mRadioButton_Medium;
     private RadioButton mRadioButton_Impossible;
+    // ********************************************************************************
+    // ********************************************************************************
 
-    // Create Object array of the Celda class
-    private Celda[] mArrayCeldas = new Celda[9];
 
-    // Create Object array of the SetCeldas class
-    private SetCeldas[] mArraySets = new SetCeldas[8];
 
-    // Create Object array of the Jugador class
-    private Jugador[] mArrayJugador = new Jugador[3];
+    // ********************************************************************************
+    // Create Object array of the cell class
+    // ********************************************************************************
+    private Cell[] mArrayCells = new Cell[9];
+    // ********************************************************************************
+    // ********************************************************************************
 
+
+
+    // ********************************************************************************
+    // Create Object array of the SetCells class
+    // ********************************************************************************
+    private SetCells[] mArraySets = new SetCells[8];
+    // ********************************************************************************
+    // ********************************************************************************
+
+
+
+    // ********************************************************************************
+    // Create Object array of the Player class
+    // ********************************************************************************
+    private Player[] mArrayPlayer = new Player[3];
+    // ********************************************************************************
+    // ********************************************************************************
+
+
+
+    // ********************************************************************************
     // Internal use variables
-    private int mNumero_De_Jugadores;   // Number of players of the game in use
-    private int mTurno = 0;             // We start with turn "0" (nobody can play)
-    private int mCeldas_Libres;         // Number of free cells, to know when the game is over
+    // ********************************************************************************
+    private int Number_Of_Playeres;  // Number of players of the game in use
+    private int Turn = 0;            // We start with turn "0" (nobody can play)
+    private int vacant_Cells;        // Number of free cells, to know when the game is over
+    // ********************************************************************************
+    // ********************************************************************************
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // We refer to the encapsulated variables to the corresponding View
-        mButton_1_Jugador = findViewById(R.id.id_butoon_1player);
-        mButton_2_Jugadores = findViewById(R.id.id_butoon_2players);
+        // ********************************************************************************
+        // We match the variables to the corresponding View
+        // ********************************************************************************
+        mButton_1_Player = findViewById(R.id.id_butoon_1player);
+        mButton_2_Player = findViewById(R.id.id_butoon_2players);
         mButton_Settings = findViewById(R.id.id_butoonS);
         mRadioButton_Easy = findViewById(R.id.id_radio_button_easy_difficulty);
         mRadioButton_Medium = findViewById(R.id.id_radio_button_medium_difficulty);
         mRadioButton_Impossible = findViewById(R.id.id_radio_button_impossible_difficulty);
+        // ********************************************************************************
+        // ********************************************************************************
 
-        // We fill the elements of the cell array with references to the cells
+
+
+        // ********************************************************************************
+        // We fill the elements of the mArrayCells with references to the cells
         // We create the cells in the same line
-        mArrayCeldas[0] = new Celda((ImageView) findViewById(R.id.id_iv_a1), 3);
-        mArrayCeldas[1] = new Celda((ImageView) findViewById(R.id.id_iv_a2), 2);
-        mArrayCeldas[2] = new Celda((ImageView) findViewById(R.id.id_iv_a3), 3);
+        // ********************************************************************************
+        mArrayCells[0] = new Cell((ImageView) findViewById(R.id.id_iv_a1), 3);
+        mArrayCells[1] = new Cell((ImageView) findViewById(R.id.id_iv_a2), 2);
+        mArrayCells[2] = new Cell((ImageView) findViewById(R.id.id_iv_a3), 3);
 
-        mArrayCeldas[3] = new Celda((ImageView) findViewById(R.id.id_iv_b1), 2);
-        mArrayCeldas[4] = new Celda((ImageView) findViewById(R.id.id_iv_b2), 4);
-        mArrayCeldas[5] = new Celda((ImageView) findViewById(R.id.id_iv_b3), 2);
+        mArrayCells[3] = new Cell((ImageView) findViewById(R.id.id_iv_b1), 2);
+        mArrayCells[4] = new Cell((ImageView) findViewById(R.id.id_iv_b2), 4);
+        mArrayCells[5] = new Cell((ImageView) findViewById(R.id.id_iv_b3), 2);
 
-        mArrayCeldas[6] = new Celda((ImageView) findViewById(R.id.id_iv_c1), 3);
-        mArrayCeldas[7] = new Celda((ImageView) findViewById(R.id.id_iv_c2), 2);
-        mArrayCeldas[8] = new Celda((ImageView) findViewById(R.id.id_iv_c3), 3);
+        mArrayCells[6] = new Cell((ImageView) findViewById(R.id.id_iv_c1), 3);
+        mArrayCells[7] = new Cell((ImageView) findViewById(R.id.id_iv_c2), 2);
+        mArrayCells[8] = new Cell((ImageView) findViewById(R.id.id_iv_c3), 3);
+        // ********************************************************************************
+        // ********************************************************************************
 
-        // We create the cell sets with references to the cells
 
+
+        // ********************************************************************************
+        // We create the SetCells with references to the cells that make up the set
         // Sets for the rows 0, 1 y 2
-        mArraySets[0] = new SetCeldas(mArrayCeldas[0], mArrayCeldas[1], mArrayCeldas[2]);
-        mArraySets[1] = new SetCeldas(mArrayCeldas[3], mArrayCeldas[4], mArrayCeldas[5]);
-        mArraySets[2] = new SetCeldas(mArrayCeldas[6], mArrayCeldas[7], mArrayCeldas[8]);
+        // ********************************************************************************
+        mArraySets[0] = new SetCells(mArrayCells[0], mArrayCells[1], mArrayCells[2]);
+        mArraySets[1] = new SetCells(mArrayCells[3], mArrayCells[4], mArrayCells[5]);
+        mArraySets[2] = new SetCells(mArrayCells[6], mArrayCells[7], mArrayCells[8]);
+        // ********************************************************************************
+        // ********************************************************************************
 
+
+
+        // ********************************************************************************
         // Sets for the columns  0, 1 y 2
-        mArraySets[3] = new SetCeldas(mArrayCeldas[0], mArrayCeldas[3], mArrayCeldas[6]);
-        mArraySets[4] = new SetCeldas(mArrayCeldas[1], mArrayCeldas[4], mArrayCeldas[7]);
-        mArraySets[5] = new SetCeldas(mArrayCeldas[2], mArrayCeldas[5], mArrayCeldas[8]);
+        // ********************************************************************************
+        mArraySets[3] = new SetCells(mArrayCells[0], mArrayCells[3], mArrayCells[6]);
+        mArraySets[4] = new SetCells(mArrayCells[1], mArrayCells[4], mArrayCells[7]);
+        mArraySets[5] = new SetCells(mArrayCells[2], mArrayCells[5], mArrayCells[8]);
+        // ********************************************************************************
+        // ********************************************************************************
 
+
+
+        // ********************************************************************************
         // Sets for diagonals 0 y 1
-        mArraySets[6] = new SetCeldas(mArrayCeldas[0], mArrayCeldas[4], mArrayCeldas[8]);
-        mArraySets[7] = new SetCeldas(mArrayCeldas[2], mArrayCeldas[4], mArrayCeldas[6]);
+        // ********************************************************************************
+        mArraySets[6] = new SetCells(mArrayCells[0], mArrayCells[4], mArrayCells[8]);
+        mArraySets[7] = new SetCells(mArrayCells[2], mArrayCells[4], mArrayCells[6]);
+        // ********************************************************************************
+        // ********************************************************************************
 
+
+
+        // ********************************************************************************
         // We fill in the elements of the PlayersArray
-        String hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador0)));
-        mArrayJugador[0] = new Jugador(getString(R.string.name_Player0),hexColor, 0);
+        // ********************************************************************************
+        String hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer0)));
+        mArrayPlayer[0] = new Player(getString(R.string.name_Player0), hexColor, 0);
 
-        hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador1)));
-        mArrayJugador[1] = new Jugador(getString(R.string.name_Player1),  hexColor, 1);
+        hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer1)));
+        mArrayPlayer[1] = new Player(getString(R.string.name_Player1), hexColor, 1);
 
-        hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador2)));
-        mArrayJugador[2] = new Jugador(getString(R.string.name_Player2),hexColor, 4);
+        hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer2)));
+        mArrayPlayer[2] = new Player(getString(R.string.name_Player2), hexColor, 4);
+        // ********************************************************************************
+        // ********************************************************************************
 
-        restaurarCampos(savedInstanceState);
+
+        // ********************************************************************************
+        // Recharge of variables and arrays when returning from a deletion due to UI change
+        // ********************************************************************************
+        if (savedInstanceState != null) {
+            int[] ArrayOwner = new int[9];
+            ArrayOwner = savedInstanceState.getIntArray(getString(R.string.Owner));
+            int[] ArrayValue = new int[9];
+            ArrayValue = savedInstanceState.getIntArray(getString(R.string.Value));
+            for (int n = 0; n < 9; n++) {
+                mArrayCells[n].setOwner(ArrayOwner[n]);
+                mArrayCells[n].setValue(ArrayValue[n]);
+                putColorToCell(mArrayCells[n]);
+            }
+            enabled_buttons(savedInstanceState.getBoolean(getString(R.string.IsButtonsEnabled), true));
+            Number_Of_Playeres = savedInstanceState.getInt(getString(R.string.NumberOfPlayers), 1);
+            Turn = savedInstanceState.getInt(getString(R.string.Turn), 1);
+            vacant_Cells = savedInstanceState.getInt(getString(R.string.VacantCells), 9);
+        }
+        // **********************************************************************
+        // **********************************************************************
     }
 
+
+    // ********************************************************************************
+    // Storage of variables and arrays when a deletion due to UI change is about
+    // ********************************************************************************
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        int[] ArrayProp = new int[9];
-        int[] ArrayValor = new int[9];
+        int[] ArrayOwner = new int[9];
+        int[] ArrayValue = new int[9];
         for (int n = 0; n < 9; n++) {
-            ArrayProp[n] = mArrayCeldas[n].getPropietario();
-            ArrayValor[n] = mArrayCeldas[n].getValor();
+            ArrayOwner[n] = mArrayCells[n].getOwner();
+            ArrayValue[n] = mArrayCells[n].getValue();
         }
-        outState.putIntArray("PROPS", ArrayProp);
-        outState.putIntArray("VALOR", ArrayValor);
-        outState.putBoolean("ENB1", mButton_1_Jugador.isEnabled());
-        outState.putInt("NUMJUG", mNumero_De_Jugadores);
-        outState.putInt("TURNO", mTurno);
-        outState.putInt("CELFREE", mCeldas_Libres);
+        outState.putIntArray(getString(R.string.Owner), ArrayOwner);
+        outState.putIntArray(getString(R.string.Value), ArrayValue);
+        outState.putBoolean(getString(R.string.IsButtonsEnabled), mButton_1_Player.isEnabled());
+        outState.putInt(getString(R.string.NumberOfPlayers), Number_Of_Playeres);
+        outState.putInt(getString(R.string.Turn), Turn);
+        outState.putInt(getString(R.string.VacantCells), vacant_Cells);
     }
+    // ********************************************************************************
+    // ********************************************************************************
+
+
 
     @Override
     protected void onResume() {
@@ -135,41 +227,23 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mArrayJugador[1].setName(sharedPreferences.getString(getString(R.string.Pla1_name_key), "No leido"));
-        mArrayJugador[2].setName(sharedPreferences.getString(getString(R.string.Pla2_name_key), "No leido"));
-        int col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla1_color_key),"1"));
-        String hexColor1 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador1)));
-        String hexColor3 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador3)));
-        if (col == 1 ){
-            mArrayJugador[1].setMcolor(hexColor1);
-        }else if (col == 2){
-            mArrayJugador[1].setMcolor(hexColor3);
+        mArrayPlayer[1].setName(sharedPreferences.getString(getString(R.string.Pla1_name_key), "No leido"));
+        mArrayPlayer[2].setName(sharedPreferences.getString(getString(R.string.Pla2_name_key), "No leido"));
+        int col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla1_color_key), "1"));
+        String hexColor1 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer1)));
+        String hexColor3 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer3)));
+        if (col == 1) {
+            mArrayPlayer[1].setMcolor(hexColor1);
+        } else if (col == 2) {
+            mArrayPlayer[1].setMcolor(hexColor3);
         }
-        col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla2_color_key),"1"));
-        String hexColor2 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador2)));
-        String hexColor4 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorJugador4)));
-        if (col == 1 ){
-            mArrayJugador[2].setMcolor(hexColor2);
-        }else if (col == 2){
-            mArrayJugador[2].setMcolor(hexColor4);
-        }
-    }
-
-    private void restaurarCampos(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            int[] ArrayProp = new int[9];
-            ArrayProp = savedInstanceState.getIntArray("PROPS");
-            int[] ArrayValor = new int[9];
-            ArrayValor = savedInstanceState.getIntArray("VALOR");
-            for (int n = 0; n < 9; n++) {
-                mArrayCeldas[n].setPropietario(ArrayProp[n]);
-                mArrayCeldas[n].setValor(ArrayValor[n]);
-                ponerColorEnCelda(mArrayCeldas[n]);
-            }
-            enabled_buttons(savedInstanceState.getBoolean("ENB1", true));
-            mNumero_De_Jugadores = savedInstanceState.getInt("NUMJUG", 1);
-            mTurno = savedInstanceState.getInt("TURNO", 1);
-            mCeldas_Libres = savedInstanceState.getInt("CELFREE", 9);
+        col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla2_color_key), "1"));
+        String hexColor2 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer2)));
+        String hexColor4 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer4)));
+        if (col == 1) {
+            mArrayPlayer[2].setMcolor(hexColor2);
+        } else if (col == 2) {
+            mArrayPlayer[2].setMcolor(hexColor4);
         }
     }
 
@@ -179,29 +253,29 @@ public class MainActivity extends AppCompatActivity {
             startActivity(startSettingsActivity);
             return;
         }
-        mNumero_De_Jugadores = 1;
-        if (view.getId() == mButton_2_Jugadores.getId()) mNumero_De_Jugadores = 2;
+        Number_Of_Playeres = 1;
+        if (view.getId() == mButton_2_Player.getId()) Number_Of_Playeres = 2;
         // Inabilitar los botones y los radio_botones
         enabled_buttons(false);
-        // Poner el propietario ="0"  y el valor = 0 en todas la celdas
-        for (Celda celda : mArrayCeldas) {
-            celda.setPropietario(0);
-            celda.setValor(0);
-            ponerColorEnCelda(celda);
+        // Poner el propietario ="0"  y el valor = 0 en todas la Cells
+        for (Cell Cell : mArrayCells) {
+            Cell.setOwner(0);
+            Cell.setValue(0);
+            putColorToCell(Cell);
         }
-        // Asignar el turno al jugador 1 e inicializar nemero de celdas libres
-        mTurno = 1;
-        mCeldas_Libres = 9;
+        // Asignar el turno al Player 1 e inicializar nemero de Cells libres
+        Turn = 1;
+        vacant_Cells = 9;
     }
 
-    public void ponerColorEnCelda(Celda celda) {
-        String colJug = mArrayJugador[celda.getPropietario()].getMcolor();
-        celda.getImageView().setBackgroundColor(Color.parseColor(colJug));
+    public void putColorToCell(Cell Cell) {
+        String colJug = mArrayPlayer[Cell.getOwner()].getMcolor();
+        Cell.getImageView().setBackgroundColor(Color.parseColor(colJug));
     }
 
     public void enabled_buttons(boolean enabled) {
-        mButton_1_Jugador.setEnabled(enabled);
-        mButton_2_Jugadores.setEnabled(enabled);
+        mButton_1_Player.setEnabled(enabled);
+        mButton_2_Player.setEnabled(enabled);
         mButton_Settings.setEnabled(enabled);
         mRadioButton_Easy.setEnabled(enabled);
         mRadioButton_Easy.setEnabled(enabled);
@@ -209,82 +283,82 @@ public class MainActivity extends AppCompatActivity {
         mRadioButton_Impossible.setEnabled(enabled);
     }
 
-    public void juegaEnCelda(Celda celda) {
-        if (celda == null || celda.getPropietario() != 0 || mTurno == 0) return;
-        celda.setPropietario(mTurno);
-        celda.setValor(mArrayJugador[mTurno].getMvalor());
-        ponerColorEnCelda(celda);
+    public void juegaEnCell(Cell Cell) {
+        if (Cell == null || Cell.getOwner() != 0 || Turn == 0) return;
+        Cell.setOwner(Turn);
+        Cell.setValue(mArrayPlayer[Turn].getmValue());
+        putColorToCell(Cell);
         comprueba_si_ganador();
-        celdas_libres();
+        Cells_libres();
         cambio_de_turno();
     }
 
     public void casilla_pulsada(View view) {
-        if (mTurno != 0) {
+        if (Turn != 0) {
             int index = Integer.valueOf(view.getTag().toString());
-            juegaEnCelda(mArrayCeldas[index]);
+            juegaEnCell(mArrayCells[index]);
         }
     }
 
     public void maquina_juega() {
-        Celda celda = busca_mejor_celda_para_maquina();
-        if (celda == null) {
+        Cell Cell = busca_mejor_Cell_para_maquina();
+        if (Cell == null) {
             do {
             }
             while
-            ((celda = mArrayCeldas[new Random().nextInt(9)]).getPropietario() != 0);
+            ((Cell = mArrayCells[new Random().nextInt(9)]).getOwner() != 0);
         }
-        juegaEnCelda(celda);
+        juegaEnCell(Cell);
     }
 
-    public void celdas_libres() {
-        mCeldas_Libres--;
-        if (mCeldas_Libres < 1) {
-            mCeldas_Libres = 0;
-            mTurno = 0;
+    public void Cells_libres() {
+        vacant_Cells--;
+        if (vacant_Cells < 1) {
+            vacant_Cells = 0;
+            Turn = 0;
             enabled_buttons(true);
         }
     }
 
     public void cambio_de_turno() {
-        mTurno++;
-        if (mTurno > 2) mTurno = 1;
-        if (mTurno == 2 && mNumero_De_Jugadores == 1) {
+        Turn++;
+        if (Turn > 2) Turn = 1;
+        if (Turn == 2 && Number_Of_Playeres == 1) {
             maquina_juega();
         }
     }
 
     public void comprueba_si_ganador() {
         for (int n = 0; n < mArraySets.length; n++) {
-            for (int jugador = 1; jugador < 3; jugador++) {
-                if (mArraySets[n].getSuma() == mArrayJugador[jugador].getMvalor() * 3) {
+            for (int Player = 1; Player < 3; Player++) {
+                if (mArraySets[n].getSuma() == mArrayPlayer[Player].getmValue() * 3) {
                     Toast.makeText(this, getString(R.string.winner)
-                            + mArrayJugador[jugador].getName(), Toast.LENGTH_LONG).show();
-                    mCeldas_Libres = 0;
+                            + mArrayPlayer[Player].getName(), Toast.LENGTH_LONG).show();
+                    vacant_Cells = 0;
                     break;
                 }
             }
         }
     }
 
-    public Celda busca_mejor_celda_para_maquina() {
+    public Cell busca_mejor_Cell_para_maquina() {
         int inicio = 1;
         if (!mRadioButton_Easy.isChecked()) inicio = 2;
-        for (int jugador = inicio; jugador > 0; jugador--) {
+        for (int Player = inicio; Player > 0; Player--) {
             for (int n = 0; n < mArraySets.length; n++) {
-                if (mArraySets[n].getSuma() == mArrayJugador[jugador].getMvalor() * 2) {
-                    for (int m = 0; m < mArraySets[n].getArrayCeldasEnSet().length; m++) {
-                        if (mArraySets[n].getCeldaEnSet(m).getPropietario() == 0) {
-                            return mArraySets[n].getCeldaEnSet(m);
+                if (mArraySets[n].getSuma() == mArrayPlayer[Player].getmValue() * 2) {
+                    for (int m = 0; m < mArraySets[n].getArrayCellsEnSet().length; m++) {
+                        if (mArraySets[n].getCellEnSet(m).getOwner() == 0) {
+                            return mArraySets[n].getCellEnSet(m);
                         }
                     }
                 }
             }
         }
 
-        // SI NINGUNA DE LAS ANTERIORES, BUSCA LA CELDA VACIA CON MAS PESO Y LA OCUPA
-        Celda celda = null;
-        if (!mRadioButton_Impossible.isChecked()) return celda;
+        // IF IT IS NOT THE ABOVE, LOOK FOR THE EMPTY CELL WITH MORE WEIGHT AND IT OCCUPIES IT
+        Cell Cell = null;
+        if (!mRadioButton_Impossible.isChecked()) return Cell;
         int maxPeso = 0;
         int inicia = new Random().nextInt(8);
         int m;
@@ -294,11 +368,11 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 m = n % 8;
             }
-            if (mArrayCeldas[m].getPropietario() == 0 && mArrayCeldas[m].getPeso() > maxPeso) {
-                maxPeso = mArrayCeldas[m].getPeso();
-                celda = mArrayCeldas[m];
+            if (mArrayCells[m].getOwner() == 0 && mArrayCells[m].getWeigth() > maxPeso) {
+                maxPeso = mArrayCells[m].getWeigth();
+                Cell = mArrayCells[m];
             }
         }
-        return celda;
+        return Cell;
     }
 }

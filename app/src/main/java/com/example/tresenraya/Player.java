@@ -1,16 +1,14 @@
 package com.example.tresenraya;
 
-import android.graphics.Color;
-
-public class Jugador {
+public class Player {
     private String mName;
     private String mColor;
-    private int mValor;
+    private int mValue;
 
-    public Jugador(String name, String  color, int valor) {
+    public Player(String name, String  color, int valor) {
         mName = name;
         mColor = color;
-        mValor = valor;
+        mValue = valor;
     }
 
     public String getName() {
@@ -29,11 +27,11 @@ public class Jugador {
         mColor = color;
     }
 
-    public int getMvalor() {
-        return mValor;
+    public int getmValue() {
+        return mValue;
     }
 
-    public void setMvalor(int mvalor) {
-        this.mValor = mvalor;
+    public void setmValue(int mValue) {
+        this.mValue = mValue;
     }
 }

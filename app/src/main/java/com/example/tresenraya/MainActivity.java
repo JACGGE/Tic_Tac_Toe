@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
     // TODO WIFI 2 Players
     // TODO Ingles comentarios
 
-/***************************************************************************************************
- *  Create variables to reference the Views
-***************************************************************************************************/
+    /***************************************************************************************************
+     *  Create variables to reference the Views
+     ***************************************************************************************************/
     private Button mButton_1_Player;
     private Button mButton_2_Player;
     private Button mButton_Settings;
@@ -35,27 +35,27 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton mRadioButton_Impossible;
 
 
-/***************************************************************************************************
- *  Create Object array of the cell class
-***************************************************************************************************/
+    /***************************************************************************************************
+     *  Create Object array of the cell class
+     ***************************************************************************************************/
     private Cell[] mArrayCells = new Cell[9];
 
 
-/***************************************************************************************************
- *  Create Object array of the SetCells class
-***************************************************************************************************/
+    /***************************************************************************************************
+     *  Create Object array of the SetCells class
+     ***************************************************************************************************/
     private SetCells[] mArraySets = new SetCells[8];
 
 
-/***************************************************************************************************
- *  Create Object array of the Player class
-***************************************************************************************************/
+    /***************************************************************************************************
+     *  Create Object array of the Player class
+     ***************************************************************************************************/
     private Player[] mArrayPlayer = new Player[3];
 
 
-/***************************************************************************************************
- *  Internal use variables
-***************************************************************************************************/
+    /***************************************************************************************************
+     *  Internal use variables
+     ***************************************************************************************************/
     private int Number_Of_Playeres;  // Number of players of the game in use
     private int Turn = 0;            // We start with turn "0" (nobody can play)
     private int vacant_Cells;        // Number of free cells, to know when the game is over
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
 /***************************************************************************************************
  *      We match the variables to the corresponding View
-***************************************************************************************************/
+ ***************************************************************************************************/
         mButton_1_Player = findViewById(R.id.id_butoon_1player);
         mButton_2_Player = findViewById(R.id.id_butoon_2players);
         mButton_Settings = findViewById(R.id.id_butoonS);
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 /***************************************************************************************************
  *      We fill the elements of the mArrayCells with references to the cells
  *      We create the cells in the same line
-***************************************************************************************************/
+ ***************************************************************************************************/
         mArrayCells[0] = new Cell((ImageView) findViewById(R.id.id_iv_a1), 3);
         mArrayCells[1] = new Cell((ImageView) findViewById(R.id.id_iv_a2), 2);
         mArrayCells[2] = new Cell((ImageView) findViewById(R.id.id_iv_a3), 3);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 /***************************************************************************************************
  *      We create the SetCells with references to the cells that make up the set
  *      Sets for the rows 0, 1 y 2
-***************************************************************************************************/
+ ***************************************************************************************************/
         mArraySets[0] = new SetCells(mArrayCells[0], mArrayCells[1], mArrayCells[2]);
         mArraySets[1] = new SetCells(mArrayCells[3], mArrayCells[4], mArrayCells[5]);
         mArraySets[2] = new SetCells(mArrayCells[6], mArrayCells[7], mArrayCells[8]);
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
 /***************************************************************************************************
  *      Sets for the columns  0, 1 y 2
-***************************************************************************************************/
+ ***************************************************************************************************/
         mArraySets[3] = new SetCells(mArrayCells[0], mArrayCells[3], mArrayCells[6]);
         mArraySets[4] = new SetCells(mArrayCells[1], mArrayCells[4], mArrayCells[7]);
         mArraySets[5] = new SetCells(mArrayCells[2], mArrayCells[5], mArrayCells[8]);
@@ -113,14 +113,14 @@ public class MainActivity extends AppCompatActivity {
 
 /***************************************************************************************************
  *      Sets for diagonals 0 y 1
-***************************************************************************************************/
+ ***************************************************************************************************/
         mArraySets[6] = new SetCells(mArrayCells[0], mArrayCells[4], mArrayCells[8]);
         mArraySets[7] = new SetCells(mArrayCells[2], mArrayCells[4], mArrayCells[6]);
 
 
 /***************************************************************************************************
  *      We fill in the elements of the PlayersArray
-***************************************************************************************************/
+ ***************************************************************************************************/
         String hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer0)));
         mArrayPlayer[0] = new Player(getString(R.string.name_Player0), hexColor, 0);
 
@@ -133,15 +133,12 @@ public class MainActivity extends AppCompatActivity {
 
 /***************************************************************************************************
  *      Recharge of variables and arrays when returning from a deletion due to UI change
-***************************************************************************************************/
+ ***************************************************************************************************/
         if (savedInstanceState != null) {
             int[] ArrayOwner = new int[9];
             ArrayOwner = savedInstanceState.getIntArray(getString(R.string.Owner));
-            int[] ArrayValue = new int[9];
-            ArrayValue = savedInstanceState.getIntArray(getString(R.string.Value));
             for (int n = 0; n < 9; n++) {
                 mArrayCells[n].setOwner(ArrayOwner[n]);
-                mArrayCells[n].setValue(ArrayValue[n]);
                 putColorToCell(mArrayCells[n]);
             }
             enabled_buttons(savedInstanceState.getBoolean(getString(R.string.IsButtonsEnabled), true));
@@ -149,23 +146,20 @@ public class MainActivity extends AppCompatActivity {
             Turn = savedInstanceState.getInt(getString(R.string.Turn), 1);
             vacant_Cells = savedInstanceState.getInt(getString(R.string.VacantCells), 9);
         }
-         }
+    }
 
 
-/***************************************************************************************************
- *  Storage of variables and arrays when a deletion due to UI change is about
-***************************************************************************************************/
+    /***************************************************************************************************
+     *  Storage of variables and arrays when a deletion due to UI change is about
+     ***************************************************************************************************/
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         int[] ArrayOwner = new int[9];
-        int[] ArrayValue = new int[9];
         for (int n = 0; n < 9; n++) {
             ArrayOwner[n] = mArrayCells[n].getOwner();
-            ArrayValue[n] = mArrayCells[n].getValue();
         }
         outState.putIntArray(getString(R.string.Owner), ArrayOwner);
-        outState.putIntArray(getString(R.string.Value), ArrayValue);
         outState.putBoolean(getString(R.string.IsButtonsEnabled), mButton_1_Player.isEnabled());
         outState.putInt(getString(R.string.NumberOfPlayers), Number_Of_Playeres);
         outState.putInt(getString(R.string.Turn), Turn);
@@ -173,9 +167,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     *
+     ***************************************************************************************************/
     @Override
     protected void onResume() {
         super.onResume();
@@ -214,9 +208,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     * When the 1-player or 2-player button is pressed
+     ***************************************************************************************************/
     public void buttonClick(View view) {
         if (view.getId() == mButton_Settings.getId()) {
             Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
@@ -230,7 +224,6 @@ public class MainActivity extends AppCompatActivity {
         // Poner el propietario ="0"  y el valor = 0 en todas la Cells
         for (Cell Cell : mArrayCells) {
             Cell.setOwner(0);
-            Cell.setValue(0);
             putColorToCell(Cell);
         }
         // Asignar el turno al Player 1 e inicializar nemero de Cells libres
@@ -239,18 +232,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     * Obtiene el color del jugador propietario de la celda
+     * Aplica este color al BackgroundColor de la ImageView de la celda
+     ***************************************************************************************************/
     public void putColorToCell(Cell Cell) {
         String colJug = mArrayPlayer[Cell.getOwner()].getColor();
         Cell.getImageView().setBackgroundColor(Color.parseColor(colJug));
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     * Pone todos los Botones y radio botones Enabled o Disabled segun parametro recibido
+     ***************************************************************************************************/
     public void enabled_buttons(boolean enabled) {
         mButton_1_Player.setEnabled(enabled);
         mButton_2_Player.setEnabled(enabled);
@@ -262,13 +256,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     * Cuando un jugador selecciona una celda,
+     * 1    -> Comprobamos que la celda no sea null
+     * 2    -> Comprobamos que la celda no tenga propietario
+     * 3    -> Comprobamos que la partida este comenzada ( Turn !=0)
+     * 4    -> Adjudicamos a la celda como propietario al jugador que tiene el turno
+     * 5    -> Ponemos el color correspondiente en la celda
+     * 6    -> Comprobamos si la jugada convierte al jugador en ganador
+     * 7    -> Calculamos y actualizamos cuantas celdes libres quedan
+     * 8    -> Cambiamos al siguiente turno
+     ***************************************************************************************************/
     public void juegaEnCell(Cell Cell) {
         if (Cell == null || Cell.getOwner() != 0 || Turn == 0) return;
         Cell.setOwner(Turn);
-        Cell.setValue(mArrayPlayer[Turn].getValue());
         putColorToCell(Cell);
         comprueba_si_ganador();
         Cells_libres();
@@ -276,9 +277,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     *
+     ***************************************************************************************************/
     public void casilla_pulsada(View view) {
         if (Turn != 0) {
             int index = Integer.valueOf(view.getTag().toString());
@@ -287,9 +288,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     *
+     ***************************************************************************************************/
     public void maquina_juega() {
         Cell Cell = busca_mejor_Cell_para_maquina();
         if (Cell == null) {
@@ -302,9 +303,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     *
+     ***************************************************************************************************/
     public void Cells_libres() {
         vacant_Cells--;
         if (vacant_Cells < 1) {
@@ -315,9 +316,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     *
+     ***************************************************************************************************/
     public void cambio_de_turno() {
         Turn++;
         if (Turn > 2) Turn = 1;
@@ -327,14 +328,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     *
+     ***************************************************************************************************/
     public void comprueba_si_ganador() {
         for (int n = 0; n < mArraySets.length; n++) {
             for (int Player = 1; Player < 3; Player++) {
-                if (mArraySets[n].getSuma() == mArrayPlayer[Player].getValue() * 3) {
-                    Toast.makeText(this, getString(R.string.winner)
+                if (mArraySets[n].getSuma() == (Player * Player) * 3) {
+                Toast.makeText(this, getString(R.string.winner)
                             + mArrayPlayer[Player].getName(), Toast.LENGTH_LONG).show();
                     vacant_Cells = 0;
                     break;
@@ -344,15 +345,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/***************************************************************************************************
- *
-***************************************************************************************************/
+    /***************************************************************************************************
+     *
+     ***************************************************************************************************/
     public Cell busca_mejor_Cell_para_maquina() {
         int inicio = 1;
         if (!mRadioButton_Easy.isChecked()) inicio = 2;
         for (int Player = inicio; Player > 0; Player--) {
             for (int n = 0; n < mArraySets.length; n++) {
-                if (mArraySets[n].getSuma() == mArrayPlayer[Player].getValue() * 2) {
+                 if (mArraySets[n].getSuma() == (Player * Player) * 2) {
                     for (int m = 0; m < mArraySets[n].getArrayCellsEnSet().length; m++) {
                         if (mArraySets[n].getCellEnSet(m).getOwner() == 0) {
                             return mArraySets[n].getCellEnSet(m);

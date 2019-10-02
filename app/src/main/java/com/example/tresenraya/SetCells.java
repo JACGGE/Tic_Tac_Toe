@@ -1,6 +1,5 @@
 package com.example.tresenraya;
 
-import java.util.ArrayList;
 
 public class SetCells {
     private Cell[] mArrayCellsEnSet = new Cell[3];
@@ -21,7 +20,7 @@ public class SetCells {
     public int getSuma() {
         int suma = 0;
         for (int n = 0; n < mArrayCellsEnSet.length; n ++){
-            suma = suma + mArrayCellsEnSet[n].getValue();}
+            suma = suma + (mArrayCellsEnSet[n].getOwner() * mArrayCellsEnSet[n].getOwner());}
         return suma;
     }
  }

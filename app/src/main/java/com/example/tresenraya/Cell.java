@@ -7,7 +7,6 @@
  *              (0-Vacant cell / 1-Player 1 / 2-Player 2
  * mWeight    -> The weight of a cell represents the number of winning combinations
  *              in which it can participate
- * mValue     ->
 ***************************************************************************************************/
 
 package com.example.tresenraya;
@@ -18,17 +17,13 @@ public class Cell {
     private ImageView mImageView;
     private int mOwner;
     private int mWeight;
-    private int mValue;
 
     public Cell(ImageView Cell, int weigth) {
         mImageView = Cell;
         mWeight = weigth;
         mOwner = 0;
-        mValue = 0;
     }
 
-    int getValue() {return mValue;}
-    void setValue(int value) {mValue = value;}
     ImageView getImageView() {return mImageView;}
     int getOwner() {return mOwner;}
     void setOwner(int turn) {mOwner = turn;}

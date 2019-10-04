@@ -4,7 +4,7 @@ public class Player {
     private String mName;
     private String mColor;
 
-    public Player(String name, String  color, int valor) {
+    public Player(String name, String  color) {
         mName = name;
         mColor = color;
     }

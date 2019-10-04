@@ -24,7 +24,7 @@
     </style>
     
     <style name="Image">
-        <item name="android:onClick"> casilla_pulsada</item>
+        <item name="android:onClick"> playerClickACell</item>
         <item name="android:layout_columnWeight">1</item>
         <item name="android:layout_rowWeight">1</item>
         <item name="android:background">@color/colorPlayer1</item>

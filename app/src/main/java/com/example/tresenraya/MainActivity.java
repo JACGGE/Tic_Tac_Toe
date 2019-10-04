@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     /***************************************************************************************************
      *  Internal use variables
      ***************************************************************************************************/
-    private int Number_Of_Playeres;  // Number of players of the game in use
+    private int Number_Of_Players;  // Number of players of the game in use
     private int Turn = 0;            // We start with turn "0" (nobody can play)
     private int vacant_Cells;        // Number of free cells, to know when the game is over
 
@@ -122,13 +122,13 @@ public class MainActivity extends AppCompatActivity {
  *      We fill in the elements of the PlayersArray
  ***************************************************************************************************/
         String hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer0)));
-        mArrayPlayer[0] = new Player(getString(R.string.name_Player0), hexColor, 0);
+        mArrayPlayer[0] = new Player(getString(R.string.name_Player0), hexColor);
 
         hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer1)));
-        mArrayPlayer[1] = new Player(getString(R.string.name_Player1), hexColor, 1);
+        mArrayPlayer[1] = new Player(getString(R.string.name_Player1), hexColor);
 
         hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer2)));
-        mArrayPlayer[2] = new Player(getString(R.string.name_Player2), hexColor, 4);
+        mArrayPlayer[2] = new Player(getString(R.string.name_Player2), hexColor);
 
 
 /***************************************************************************************************
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 putColorToCell(mArrayCells[n]);
             }
             enabled_buttons(savedInstanceState.getBoolean(getString(R.string.IsButtonsEnabled), true));
-            Number_Of_Playeres = savedInstanceState.getInt(getString(R.string.NumberOfPlayers), 1);
+            Number_Of_Players = savedInstanceState.getInt(getString(R.string.NumberOfPlayers), 1);
             Turn = savedInstanceState.getInt(getString(R.string.Turn), 1);
             vacant_Cells = savedInstanceState.getInt(getString(R.string.VacantCells), 9);
         }
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         }
         outState.putIntArray(getString(R.string.Owner), ArrayOwner);
         outState.putBoolean(getString(R.string.IsButtonsEnabled), mButton_1_Player.isEnabled());
-        outState.putInt(getString(R.string.NumberOfPlayers), Number_Of_Playeres);
+        outState.putInt(getString(R.string.NumberOfPlayers), Number_Of_Players);
         outState.putInt(getString(R.string.Turn), Turn);
         outState.putInt(getString(R.string.VacantCells), vacant_Cells);
     }
@@ -217,24 +217,30 @@ public class MainActivity extends AppCompatActivity {
             startActivity(startSettingsActivity);
             return;
         }
-        Number_Of_Playeres = 1;
-        if (view.getId() == mButton_2_Player.getId()) Number_Of_Playeres = 2;
-        // Inabilitar los botones y los radio_botones
+        Number_Of_Players = 1;
+        if (view.getId() == mButton_2_Player.getId()) Number_Of_Players = 2;
+
+        /** Disable buttons and radio buttons */
         enabled_buttons(false);
-        // Poner el propietario ="0"  y el valor = 0 en todas la Cells
+
+        /** For all the Cells
+         * set the owner to 0
+         * set the value to 0
+         * and  put the correct backgroundcolor to the cell  */
         for (Cell Cell : mArrayCells) {
             Cell.setOwner(0);
             putColorToCell(Cell);
         }
-        // Asignar el turno al Player 1 e inicializar nemero de Cells libres
+
+        /** Assign the turn to Player 1 and initialize number of free Cells */
         Turn = 1;
         vacant_Cells = 9;
     }
 
 
     /***************************************************************************************************
-     * Obtiene el color del jugador propietario de la celda
-     * Aplica este color al BackgroundColor de la ImageView de la celda
+     * Get the color of the cell owner player
+     * Apply this color to the BackgroundColor of the ImageView of the cell
      ***************************************************************************************************/
     public void putColorToCell(Cell Cell) {
         String colJug = mArrayPlayer[Cell.getOwner()].getColor();
@@ -243,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /***************************************************************************************************
-     * Pone todos los Botones y radio botones Enabled o Disabled segun parametro recibido
+     * Set all Buttons and radio buttons Enabled or Disabled according to received parameter
      ***************************************************************************************************/
     public void enabled_buttons(boolean enabled) {
         mButton_1_Player.setEnabled(enabled);
@@ -257,57 +263,66 @@ public class MainActivity extends AppCompatActivity {
 
 
     /***************************************************************************************************
-     * Cuando un jugador selecciona una celda,
-     * 1    -> Comprobamos que la celda no sea null
-     * 2    -> Comprobamos que la celda no tenga propietario
-     * 3    -> Comprobamos que la partida este comenzada ( Turn !=0)
-     * 4    -> Adjudicamos a la celda como propietario al jugador que tiene el turno
-     * 5    -> Ponemos el color correspondiente en la celda
-     * 6    -> Comprobamos si la jugada convierte al jugador en ganador
-     * 7    -> Calculamos y actualizamos cuantas celdes libres quedan
-     * 8    -> Cambiamos al siguiente turno
-     ***************************************************************************************************/
-    public void juegaEnCell(Cell Cell) {
+     * When a player selects a cell,
+     * 1 -> Check that the cell is not null
+     * 2 -> Check that the cell has no owner
+     * 3 -> Check that the game is started (Turn! = 0)
+     * 4 -> We award to the cell as owner the player who has the turn
+     * 5 -> We put the corresponding color in the cell
+     * 6 -> Check if the play makes the player a winner
+     * 7 -> We calculate and update how many vacant cells are left
+     * 8 -> We switch to the next turn
+     * ***************************************************************************************************/
+    public void playerSelectCell(Cell Cell) {
         if (Cell == null || Cell.getOwner() != 0 || Turn == 0) return;
         Cell.setOwner(Turn);
         putColorToCell(Cell);
-        comprueba_si_ganador();
-        Cells_libres();
-        cambio_de_turno();
+        chack_if_there_is_a_winner();
+        vacantCells();
+        shift_Change();
     }
 
 
     /***************************************************************************************************
-     *
+     * When a player clicks on a cell
+     * 1    -> Check that the game is started (Turn! = 0)
+     * 2    -> We get the index of the pressed cell
+     * 3    -> With this index we call playerSelectCell
      ***************************************************************************************************/
-    public void casilla_pulsada(View view) {
+    public void playerClickACell(View view) {
         if (Turn != 0) {
             int index = Integer.valueOf(view.getTag().toString());
-            juegaEnCell(mArrayCells[index]);
+            playerSelectCell(mArrayCells[index]);
         }
     }
 
 
     /***************************************************************************************************
-     *
+     * When the Android gat the turn
+     * 1    -> Search for the best possible cell
+     * 2    -> If no cell is found
+     * 3    -> Randomly search for a cell without an owner (vacant cell)
      ***************************************************************************************************/
-    public void maquina_juega() {
-        Cell Cell = busca_mejor_Cell_para_maquina();
+    public void androidPlay() {
+        Cell Cell = androidSearchForBestCell();
         if (Cell == null) {
             do {
             }
             while
             ((Cell = mArrayCells[new Random().nextInt(9)]).getOwner() != 0);
         }
-        juegaEnCell(Cell);
+        playerSelectCell(Cell);
     }
 
 
     /***************************************************************************************************
-     *
+     * The vacant_Cells variable, counts the number of vacant cells
+     * Each time a cell is occupied, this procedure is called, which remains 1
+     * Once subtracted 1, if the number of cells without owner is less than 1
+     * the game is terminated. Turn is set to 0 and the buttons are Enabled
      ***************************************************************************************************/
-    public void Cells_libres() {
-        vacant_Cells--;
+    public void vacantCells() {
+        vacant_Cells --;
         if (vacant_Cells < 1) {
             vacant_Cells = 0;
             Turn = 0;
@@ -319,36 +334,33 @@ public class MainActivity extends AppCompatActivity {
     /***************************************************************************************************
      *
      ***************************************************************************************************/
-    public void cambio_de_turno() {
-        Turn++;
+    public void shift_Change() {
+        if (Turn == 0)  return;
+        Turn ++;
         if (Turn > 2) Turn = 1;
-        if (Turn == 2 && Number_Of_Playeres == 1) {
-            maquina_juega();
-        }
+        if (Turn == 2 && Number_Of_Players == 1) androidPlay();
     }
 
 
     /***************************************************************************************************
      *
      ***************************************************************************************************/
-    public void comprueba_si_ganador() {
+    public void chack_if_there_is_a_winner() {
         for (int n = 0; n < mArraySets.length; n++) {
             for (int Player = 1; Player < 3; Player++) {
                 if (mArraySets[n].getSuma() == (Player * Player) * 3) {
                 Toast.makeText(this, getString(R.string.winner)
                             + mArrayPlayer[Player].getName(), Toast.LENGTH_LONG).show();
-                    vacant_Cells = 0;
-                    break;
+                vacant_Cells = 0;
+                break;
                 }
             }
         }
     }
-
-
     /***************************************************************************************************
      *
      ***************************************************************************************************/
-    public Cell busca_mejor_Cell_para_maquina() {
+    public Cell androidSearchForBestCell() {
         int inicio = 1;
         if (!mRadioButton_Easy.isChecked()) inicio = 2;
         for (int Player = inicio; Player > 0; Player--) {
@@ -363,18 +375,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // IF IT IS NOT THE ABOVE, LOOK FOR THE EMPTY CELL WITH MORE WEIGHT AND IT OCCUPIES IT
+        /** IF IT IS NOT THE ABOVE, LOOK FOR THE EMPTY CELL WITH MORE WEIGHT AND IT OCCUPIES IT */
         Cell Cell = null;
         if (!mRadioButton_Impossible.isChecked()) return Cell;
         int maxPeso = 0;
         int inicia = new Random().nextInt(8);
         int m;
         for (int n = inicia; n < inicia + 9; n++) {
-            if (n < 9) {
-                m = n;
-            } else {
-                m = n % 8;
-            }
+            if (n < 9) m = n; else m = n % 8;
             if (mArrayCells[m].getOwner() == 0 && mArrayCells[m].getWeigth() > maxPeso) {
                 maxPeso = mArrayCells[m].getWeigth();
                 Cell = mArrayCells[m];

@@ -61,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
     private int vacant_Cells;        // Number of free cells, to know when the game is over
 
 
+    /***************************************************************************************************
+     *  We match the variables to the corresponding View
+     ***************************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-/***************************************************************************************************
- *      We match the variables to the corresponding View
- ***************************************************************************************************/
         mButton_1_Player = findViewById(R.id.id_butoon_1player);
         mButton_2_Player = findViewById(R.id.id_butoon_2players);
         mButton_Settings = findViewById(R.id.id_butoonS);
@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
  *      Recharge of variables and arrays when returning from a deletion due to UI change
  ***************************************************************************************************/
         if (savedInstanceState != null) {
+            onResume(); /** To recharge Preferences */
             int[] ArrayOwner = new int[9];
             ArrayOwner = savedInstanceState.getIntArray(getString(R.string.Owner));
             for (int n = 0; n < 9; n++) {

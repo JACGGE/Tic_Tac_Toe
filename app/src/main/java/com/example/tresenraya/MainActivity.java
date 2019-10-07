@@ -142,8 +142,10 @@ public class MainActivity extends AppCompatActivity {
                 mArrayCells[n].setOwner(ArrayOwner[n]);
                 putColorToCell(mArrayCells[n]);
             }
-            enabled_buttons(savedInstanceState.getBoolean(getString(R.string.IsButtonsEnabled), true));
-            Number_Of_Players = savedInstanceState.getInt(getString(R.string.NumberOfPlayers), 1);
+            enabled_buttons(savedInstanceState.getBoolean
+                    (getString(R.string.IsButtonsEnabled), true));
+            Number_Of_Players = savedInstanceState.getInt
+                    (getString(R.string.NumberOfPlayers), 1);
             Turn = savedInstanceState.getInt(getString(R.string.Turn), 1);
             vacant_Cells = savedInstanceState.getInt(getString(R.string.VacantCells), 9);
         }
@@ -191,7 +193,8 @@ public class MainActivity extends AppCompatActivity {
         /*******************************************************************************************
          * Recupera las preferencias sobre las matrices mArrayPlayer[?]
          ******************************************************************************************/
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
         mArrayPlayer[1].setName(sharedPreferences.getString(getString(R.string.Pla1_name_key), "No leido"));
         mArrayPlayer[2].setName(sharedPreferences.getString(getString(R.string.Pla2_name_key), "No leido"));
         int col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla1_color_key), "1"));

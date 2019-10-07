@@ -27,7 +27,7 @@
         <item name="android:onClick"> playerClickACell</item>
         <item name="android:layout_columnWeight">1</item>
         <item name="android:layout_rowWeight">1</item>
-        <item name="android:background">@color/colorPlayer1</item>
+        <item name="android:background">#0000FF</item>
         <item name="android:layout_margin">2dp</item>
      </style>
 

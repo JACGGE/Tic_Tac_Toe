@@ -4,21 +4,29 @@
     <string-array name="Pla1_color_options">
         <item>@string/Pla1_color1_label</item>
         <item>@string/Pla1_color2_label</item>
+        <item>@string/Pla1_color3_label</item>
+        <item>@string/Pla1_color4_label</item>
     </string-array>
 
     <string-array name="Pla1_color_values">
         <item>@string/Pla1_color1</item>
         <item>@string/Pla1_color2</item>
+        <item>@string/Pla1_color3</item>
+        <item>@string/Pla1_color4</item>
     </string-array>
 
     <string-array name="Pla2_color_options">
         <item>@string/Pla2_color1_label</item>
         <item>@string/Pla2_color2_label</item>
+        <item>@string/Pla2_color3_label</item>
+        <item>@string/Pla2_color4_label</item>
     </string-array>
 
     <string-array name="Pla2_color_values">
         <item>@string/Pla2_color1</item>
         <item>@string/Pla2_color2</item>
+        <item>@string/Pla2_color3</item>
+        <item>@string/Pla2_color4</item>
     </string-array>
 
  </resources>

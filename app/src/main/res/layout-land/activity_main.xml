@@ -100,7 +100,7 @@
             <ImageView
                 android:id="@+id/id_iv_a1"
                 style="@style/Image"
-                android:background="@color/colorPlayer2"
+                android:background="#FF0000"
                 android:tag="0" />
                 <!--En las tag almacenamos indice de Cell (0-9)-->
 
@@ -112,13 +112,12 @@
             <ImageView
                 android:id="@+id/id_iv_a3"
                 style="@style/Image"
-                android:background="@color/colorPlayer2"
+                android:background="#FF0000"
                 android:tag="2" />
 
             <ImageView
                 android:id="@+id/id_iv_b1"
                 style="@style/Image"
-                android:background="@color/colorPlayer1"
                 android:tag="3" />
 
             <ImageView
@@ -139,13 +138,13 @@
             <ImageView
                 android:id="@+id/id_iv_c2"
                 style="@style/Image"
-                android:background="@color/colorPlayer2"
+                android:background="#FF0000"
                 android:tag="7" />
 
             <ImageView
                 android:id="@+id/id_iv_c3"
                 style="@style/Image"
-                android:background="@color/colorPlayer2"
+                android:background="#FF0000"
                 android:tag="8" />
 
         </GridLayout>

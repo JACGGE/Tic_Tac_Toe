@@ -121,14 +121,9 @@ public class MainActivity extends AppCompatActivity {
 /***************************************************************************************************
  *      We fill in the elements of the PlayersArray
  **************************************************************************************************/
-        String hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer0)));
-        mArrayPlayer[0] = new Player(getString(R.string.name_Player0), hexColor);
-
-        hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer1)));
-        mArrayPlayer[1] = new Player(getString(R.string.name_Player1), hexColor);
-
-        hexColor = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer2)));
-        mArrayPlayer[2] = new Player(getString(R.string.name_Player2), hexColor);
+        mArrayPlayer[0] = new Player(getString(R.string.name_Player0), getString(R.string.Color0));
+        mArrayPlayer[1] = new Player(getString(R.string.name_Player1), getString(R.string.Color3));
+        mArrayPlayer[2] = new Player(getString(R.string.name_Player2), getString(R.string.Color1));
 
 
 /***************************************************************************************************
@@ -197,23 +192,39 @@ public class MainActivity extends AppCompatActivity {
                 PreferenceManager.getDefaultSharedPreferences(this);
         mArrayPlayer[1].setName(sharedPreferences.getString(getString(R.string.Pla1_name_key), "No leido"));
         mArrayPlayer[2].setName(sharedPreferences.getString(getString(R.string.Pla2_name_key), "No leido"));
-        int col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla1_color_key), "1"));
-        String hexColor1 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer1)));
-        String hexColor3 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer3)));
-        if (col == 1) {
-            mArrayPlayer[1].setColor(hexColor1);
-        } else if (col == 2) {
-            mArrayPlayer[1].setColor(hexColor3);
-        }
-        col = Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla2_color_key), "1"));
-        String hexColor2 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer2)));
-        String hexColor4 = String.format("#%06X", (0xFFFFFF & getColor(R.color.colorPlayer4)));
-        if (col == 1) {
-            mArrayPlayer[2].setColor(hexColor2);
-        } else if (col == 2) {
-            mArrayPlayer[2].setColor(hexColor4);
-        }
-    }
+
+        switch (Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla1_color_key), "1"))){
+            case 1:
+                mArrayPlayer[1].setColor(getString(R.string.Color1));
+                break;
+            case 2:
+                mArrayPlayer[1].setColor(getString(R.string.Color2));
+                break;
+             case 3:
+                 mArrayPlayer[1].setColor(getString(R.string.Color3));
+                 break;
+             case 4:
+                 mArrayPlayer[1].setColor(getString(R.string.Color4));
+                 break;
+            default: break;
+         }
+
+         switch (Integer.valueOf(sharedPreferences.getString(getString(R.string.Pla2_color_key), "2"))){
+             case 1:
+                 mArrayPlayer[2].setColor(getString(R.string.Color1));
+                 break;
+             case 2:
+                 mArrayPlayer[2].setColor(getString(R.string.Color2));
+                 break;
+             case 3:
+                 mArrayPlayer[2].setColor(getString(R.string.Color3));
+                 break;
+             case 4:
+                 mArrayPlayer[2].setColor(getString(R.string.Color4));
+                 break;
+             default: break;
+         }
+     }
 
 
     /***********************************************************************************************
@@ -253,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
     public void putColorToCell(Cell Cell) {
         String colJug = mArrayPlayer[Cell.getOwner()].getColor();
         Cell.getImageView().setBackgroundColor(Color.parseColor(colJug));
+        //Cell.getImageView().setBackgroundColor(Color.parseColor("#00FF00"));
     }
 
 

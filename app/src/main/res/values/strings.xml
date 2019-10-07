@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Texts for main_menu.xml-->
-    <string name="settings">Settings</string>
+    <string name="Color0"  translatable="false">"BLACK"</string>
+    <string name="Color1"  translatable="false">"BLUE"</string>
+    <string name="Color2"  translatable="false">"RED"</string>
+    <string name="Color3"  translatable="false">"GREEN"</string>
+    <string name="Color4"  translatable="false">"YELLOW"</string>
 
     <!-- - - - - - - - - - - -->
     <!--Used by Preferences  -->
     <!-- - - - - - - - - - - -->
+    <string name="settings">Settings</string>
+
 
     <string name="Owner" translatable="false">"OWNER"</string>
     <string name="Value" translatable="false">"VALUE"</string>
@@ -18,8 +23,12 @@
     <string name="Pla1_color_key" translatable="false">Pla1_color_key</string>
     <string name="Pla1_color1_label">Blue</string>
     <string name="Pla1_color1" translatable="false">1</string>
-    <string name="Pla1_color2_label">Green</string>
+    <string name="Pla1_color2_label">Reed</string>
     <string name="Pla1_color2" translatable="false">2</string>
+    <string name="Pla1_color3_label">Green</string>
+    <string name="Pla1_color3" translatable="false">3</string>
+    <string name="Pla1_color4_label">Yellow</string>
+    <string name="Pla1_color4" translatable="false">4</string>
 
     <string name="Pla1_name">Player 1</string>
     <string name="Pla1_name_key" translatable="false">Pla1_name_key</string>
@@ -27,10 +36,14 @@
 
     <string name="Pla2_color_for">. . . color for Player 2</string>
     <string name="Pla2_color_key" translatable="false">Pla2_color_key</string>
-    <string name="Pla2_color1_label">Red</string>
+    <string name="Pla2_color1_label">Blue</string>
     <string name="Pla2_color1" translatable="false">1</string>
-    <string name="Pla2_color2_label">Yellow</string>
+    <string name="Pla2_color2_label">Reed</string>
     <string name="Pla2_color2" translatable="false">2</string>
+    <string name="Pla2_color3_label">Green</string>
+    <string name="Pla2_color3" translatable="false">3</string>
+    <string name="Pla2_color4_label">Yellow</string>
+    <string name="Pla2_color4" translatable="false">4</string>
 
     <string name="Pla2_name">Player 2</string>
     <string name="Pla2_name_key" translatable="false">Pla2_name_key</string>

@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Color0"  translatable="false">"BLACK"</string>
-    <string name="Color1"  translatable="false">"BLUE"</string>
-    <string name="Color2"  translatable="false">"RED"</string>
-    <string name="Color3"  translatable="false">"GREEN"</string>
-    <string name="Color4"  translatable="false">"YELLOW"</string>
 
     <!-- - - - - - - - - - - -->
     <!--Used by Preferences  -->
@@ -15,8 +10,8 @@
     <string name="Owner" translatable="false">"OWNER"</string>
     <string name="Value" translatable="false">"VALUE"</string>
     <string name="IsButtonsEnabled" translatable="false">"IS_BUTTONS_ENABLED"</string>
-    <string name="NumberOfPlayers" translatable="false">"NUMBER_OF_PLAYERS"</string>
-    <string name="Turn" translatable="false">"TURN"</string>
+    <string name="NumberOfPlayers" translatable="false">"number_Of_Players"</string>
+    <string name="turn" translatable="false">"turn"</string>
     <string name="VacantCells" translatable="false">"VACANT_CELLS"</string>
 
     <string name="Pla1_color_for">. . . color for Player 1</string>
@@ -59,9 +54,6 @@
     <string name="impossible_difficulty">Hard</string>
 
     <!-- Texts for code -->
-    <string name="name_Player0">No Players</string>
-    <string name="name_Player1">Player 1</string>
-    <string name="name_Player2">Player 2</string>
     <string name="winner">THE WINNER IS... </string>
 </resources>
 

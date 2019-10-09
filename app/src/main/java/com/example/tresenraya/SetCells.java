@@ -2,25 +2,25 @@ package com.example.tresenraya;
 
 
 public class SetCells {
-    private Cell[] mArrayCellsEnSet = new Cell[3];
+    private Cell[] arrayCellsEnSet = new Cell[3];
 
     public SetCells(Cell Cell0, Cell Cell1, Cell Cell2) {
-        mArrayCellsEnSet[0] = Cell0;
-        mArrayCellsEnSet[1] = Cell1;
-        mArrayCellsEnSet[2] = Cell2;}
+        arrayCellsEnSet[0] = Cell0;
+        arrayCellsEnSet[1] = Cell1;
+        arrayCellsEnSet[2] = Cell2;}
 
     public Cell[] getArrayCellsEnSet(){
-        return mArrayCellsEnSet;
+        return arrayCellsEnSet;
         }
 
     public Cell getCellEnSet(int n){
-        return mArrayCellsEnSet[n];
+        return arrayCellsEnSet[n];
     }
 
     public int getSuma() {
         int suma = 0;
-        for (int n = 0; n < mArrayCellsEnSet.length; n ++){
-            suma = suma + (mArrayCellsEnSet[n].getOwner() * mArrayCellsEnSet[n].getOwner());}
+        for (int n = 0; n < arrayCellsEnSet.length; n ++){
+            suma = suma + (arrayCellsEnSet[n].getOwner() * arrayCellsEnSet[n].getOwner());}
         return suma;
     }
  }

@@ -29,7 +29,7 @@
         <item>@string/Pla2_color4</item>
     </string-array>
 
-    <string-array name="colorPlayer">
+    <string-array name="colorOfPlayer">
         <item>"BLACK"</item>
         <item>"BLUE"</item>
         <item>"RED"</item>

@@ -32,8 +32,5 @@
     <string name="impossible_difficulty">Dificil</string>
 
     <!-- Texts for code -->
-    <string name="name_Player0">Sin Playeres</string>
-    <string name="name_Player1">Player 1</string>
-    <string name="name_Player2">Player 2</string>
     <string name="winner">EL GANADOR ES... </string>
 </resources>

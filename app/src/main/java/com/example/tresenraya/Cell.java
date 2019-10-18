@@ -1,4 +1,15 @@
 /*
+ * Copyright (C) 2019 J.A.
+ * All rights reserved
+ *
+ * Cell Class
+ * Exceptionally developed for training and sample purposes
+ */
+
+package com.example.tresenraya;
+
+import android.widget.ImageView;
+/*
   This class will create Cell objects, corresponding to each of the cells on the game board
   Each of the cells contains the following member properties
   mImageView -> Store the ImageView of each cell, whose color will be changed
@@ -8,11 +19,6 @@
   mWeight    -> The weight of a cell represents the number of winning combinations
                in which it can participate
 */
-
-package com.example.tresenraya;
-
-import android.widget.ImageView;
-
 /**
  * Clase para instanciar cada celda
  */
@@ -21,9 +27,9 @@ public class Cell {
     private int mOwner;
     private int mWeight;
 
-    Cell(ImageView cell, int weigth) {
+    Cell(ImageView cell, int weight) {
         mImageView = cell;
-        mWeight = weigth;
+        mWeight = weight;
         mOwner = 0;
     }
 
@@ -39,7 +45,7 @@ public class Cell {
         mOwner = turn;
     }
 
-    int getWeigth() {
+    int getWeight() {
         return mWeight;
     }
 }

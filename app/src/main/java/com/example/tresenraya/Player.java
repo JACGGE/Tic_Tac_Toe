@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2019
+ * All rights reserved
+ *
+ * Player Class
+ * Exceptionally developed for training and sample purposes
+ */
+
 package com.example.tresenraya;
 
 public class Player {

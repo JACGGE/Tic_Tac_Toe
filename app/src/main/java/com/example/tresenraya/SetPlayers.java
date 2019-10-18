@@ -1,8 +1,12 @@
+/*
+ * Copyright (C) 2019
+ * All rights reserved
+ *
+ * SetPlayers Class
+ * Exceptionally developed for training and sample purposes
+ */
 package com.example.tresenraya;
 
-/**
- * Conjunto de jugadores
- */
 public class SetPlayers {
     private Player[] mPlayer = new Player[3];
 
@@ -10,10 +14,6 @@ public class SetPlayers {
         mPlayer[0] = player1;
         mPlayer[1] = player2;
         mPlayer[2] = player3;
-    }
-
-    Player getPlayer(int index) {
-        return mPlayer[index];
     }
 
     void setName(String name, int index) {

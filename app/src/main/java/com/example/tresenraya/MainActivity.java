@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2019
+ * All rights reserved
+ *
+ * MainActivity Class
+ * Exceptionally developed for training and sample purposes
+ */
+
 package com.example.tresenraya;
 
 import android.content.Intent;
@@ -19,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     // ECHO Icono hacerlo y ponerlo
     // ECHO Landscape pantalla
-    // ECHO Prefrencias
+    // ECHO Preferencias
     // TODO Sound
     // TODO Start-Up pantalla
     // TODO Inteligencia Artificial
@@ -29,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
     /*
        Create variables to reference the Views
     */
-    private Button button_1_Player;
-    private Button button_2_Player;
-    private Button button_Settings;
-    private RadioButton radioButton_Easy;
-    private RadioButton radioButton_Medium;
-    private RadioButton radioButton_Hard;
+    private Button button_1_Player,
+            button_2_Player,
+            button_Settings;
+    private RadioButton radioButton_Easy,
+            radioButton_Medium,
+            radioButton_Hard;
 
     /*
        Create Object array of the cell class
@@ -163,9 +171,6 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(getString(R.string.VacantCells), vacant_Cells);
     }
 
-    /**
-     *
-     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -191,9 +196,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         setPlayers.setName(sharedPreferences.getString
-                (getString(R.string.Pla1_name_key), "No leido"),1);
+                (getString(R.string.Pla1_name_key), "No leído"),1);
         setPlayers.setName(sharedPreferences.getString
-                (getString(R.string.Pla2_name_key), "No leido"), 2);
+                (getString(R.string.Pla2_name_key), "No leído"), 2);
         String[] colorOfPlayer = getResources().getStringArray(R.array.colorOfPlayer);
         setPlayers.setColor(colorOfPlayer[Integer.valueOf(Objects.requireNonNull
            (sharedPreferences.getString(getString(R.string.Pla1_color_key), "1")))],1);
@@ -219,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
         /* For all the Cells
          * set the owner to 0
          * set the value to 0
-         * and  put the correct backgroundcolor to the cell  */
+         * and  put the correct back to the cell  */
         for (Cell Cell : gameBoard) {
             Cell.setOwner(0);
             setColorToCell(Cell);
@@ -269,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
         if (Cell == null || Cell.getOwner() != 0 || turn == 0) return;
         Cell.setOwner(turn);
         setColorToCell(Cell);
-        chackIfThereIsAWinner();
+        checkIfThereIsAWinner();
         vacantCells();
         shift_Change();
     }
@@ -310,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
      * the game is terminated. turn is set to 0 and the buttons are Enabled
      */
     public void vacantCells() {
-        vacant_Cells--;
+        vacant_Cells --;
         if (vacant_Cells < 1) {
             vacant_Cells = 0;
             turn = 0;
@@ -333,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Procedure to determine if the last play resulted in a winner
      */
-    public void chackIfThereIsAWinner() {
+    public void checkIfThereIsAWinner() {
         for (SetOfCells set : winnerSets)
             for (int player = 1; player < 3; player++)
                 if (set.getSum() == (player * player) * 3) {
@@ -363,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
     public Cell searchForAndroidWinner() {
         Cell cell = null;
         for (SetOfCells arraySet : winnerSets)
-            if (arraySet.getSum() == 8) /*  = ((plaer2-owner)2^2) * (cells) 2; 8 = 2^2*2 *********/
+            if (arraySet.getSum() == 8) /*  = ((player2-owner)2^2) * (cells) 2; 8 = 2^2*2 *********/
                 for (int m = 0; m < arraySet.getCells().length; m++)
                     if (arraySet.getCell(m).getOwner() == 0)
                         cell = arraySet.getCell(m);
@@ -377,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
     public Cell searchForPlayer1Winner() {
         Cell cell = null;
         for (SetOfCells arraySet : winnerSets)
-            if (arraySet.getSum() == 2) /*  = ((plaer1-owner)1^2) * (cells) 2; 2 = 1^2*2 *********/
+            if (arraySet.getSum() == 2) /*  = ((player1-owner)1^2) * (cells) 2; 2 = 1^2*2 *********/
                 for (int m = 0; m < arraySet.getCells().length; m++)
                     if (arraySet.getCell(m).getOwner() == 0)
                         cell = arraySet.getCell(m);
@@ -390,9 +395,9 @@ public class MainActivity extends AppCompatActivity {
     // Only for easy mode
     public Cell searchRandomVacantCell() {
         Cell cell = null;
-        int startPoint = new Random().nextInt(8);
-        int endPoint = startPoint + gameBoard.length;
-        int max = gameBoard.length - 1;
+        int startPoint = new Random().nextInt(8),
+                endPoint = startPoint + gameBoard.length,
+                max = gameBoard.length - 1;
         for (int n = startPoint; n <= endPoint - 1; n++)
             if (gameBoard[n % max].getOwner() == 0)
                 cell = gameBoard[n % max];
@@ -424,10 +429,10 @@ public class MainActivity extends AppCompatActivity {
             for (Cell value : gameBoard) {
                 if (value.getOwner() == 0) {
                     value.setOwner(2);
-                    int numberfound = 0;
+                    int number = 0;
                     for (SetOfCells winnerSet : winnerSets)
-                        if (winnerSet.getSum() == 2 * (play * play)) numberfound++;
-                    if (numberfound > 1) {
+                        if (winnerSet.getSum() == 2 * (play * play)) number++;
+                    if (number > 1) {
                         cell = value;
                         value.setOwner(0);
                         return cell;
@@ -445,13 +450,13 @@ public class MainActivity extends AppCompatActivity {
     // Only for medium & hard modes
     public Cell searchMoreWeightCell() {
         Cell cell = null;
-        int maxWeight = 0;
-        int startPoint = new Random().nextInt(8);
-        int endPoint = startPoint + gameBoard.length;
-        int max = gameBoard.length - 1;
+        int maxWeight = 0,
+                startPoint = new Random().nextInt(8),
+                endPoint = startPoint + gameBoard.length,
+                max = gameBoard.length - 1;
         for (int n = startPoint; n < endPoint; n++)
-            if (gameBoard[n % max].getOwner() == 0 && gameBoard[n % max].getWeigth() > maxWeight) {
-                maxWeight = gameBoard[n % max].getWeigth();
+            if (gameBoard[n % max].getOwner() == 0 && gameBoard[n % max].getWeight() > maxWeight) {
+                maxWeight = gameBoard[n % max].getWeight();
                 cell = gameBoard[n % max];
             }
         return cell;

@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2019
+ * All rights reserved
+ *
+ * SettingsActivity Class
+ * Exceptionally developed for training and sample purposes
+ */
+
 package com.example.tresenraya;
 
 import android.support.v4.app.NavUtils;

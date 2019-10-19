@@ -23,11 +23,12 @@ import android.widget.Toast;
 import java.util.Objects;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     // ECHO Icono hacerlo y ponerlo
     // ECHO Landscape pantalla
     // ECHO Preferencias
+    // ECHO Poner el icono de settins en el button
     // TODO Sound
     // TODO Start-Up pantalla
     // TODO Inteligencia Artificial
@@ -78,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
         /*
          We match the variables to the corresponding View
         */
-        button_1_Player = findViewById(R.id.id_butoon_1player);
-        button_2_Player = findViewById(R.id.id_butoon_2players);
-        button_Settings = findViewById(R.id.id_butoonS);
+        button_1_Player = findViewById(R.id.id_button_1player);
+        button_2_Player = findViewById(R.id.id_button_2players);
+        button_Settings = findViewById(R.id.id_buttonS);
         radioButton_Easy = findViewById(R.id.id_radio_button_easy_difficulty);
         radioButton_Medium = findViewById(R.id.id_radio_button_medium_difficulty);
         radioButton_Hard = findViewById(R.id.id_radio_button_impossible_difficulty);
@@ -155,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Storage of variables and arrays when a deletion due to UI change is about
+     *
      * @param outState bundle tu put variables to save
      */
     @Override
@@ -196,49 +198,55 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         setPlayers.setName(sharedPreferences.getString
-                (getString(R.string.Pla1_name_key), "No leído"),1);
+                (getString(R.string.Pla1_name_key), "No leído"), 1);
         setPlayers.setName(sharedPreferences.getString
                 (getString(R.string.Pla2_name_key), "No leído"), 2);
         String[] colorOfPlayer = getResources().getStringArray(R.array.colorOfPlayer);
         setPlayers.setColor(colorOfPlayer[Integer.valueOf(Objects.requireNonNull
-           (sharedPreferences.getString(getString(R.string.Pla1_color_key), "1")))],1);
+                (sharedPreferences.getString(getString(R.string.Pla1_color_key), "1")))], 1);
         setPlayers.setColor(colorOfPlayer[Integer.valueOf(Objects.requireNonNull
-           (sharedPreferences.getString(getString(R.string.Pla2_color_key), "2")))],2);
+                (sharedPreferences.getString(getString(R.string.Pla2_color_key), "2")))], 2);
     }
 
     /**
      * When the 1-player or 2-player button is pressed
      */
-    public void buttonClick(View view) {
-        if (view.getId() == button_Settings.getId()) {
+    @Override
+    public void onClick(View view) {
+
+         if (view.getId() == button_1_Player.getId() || view.getId() == button_2_Player.getId()) {
+            number_Of_Players = 1;
+            if (view.getId() == button_2_Player.getId()) number_Of_Players = 2;
+
+            /* Disable buttons and radio buttons */
+            enabled_buttons(false);
+
+            /* For all the Cells
+             * set the owner to 0
+             * set the value to 0
+             * and  put the correct back to the cell  */
+            for (Cell Cell : gameBoard) {
+                Cell.setOwner(0);
+                setColorToCell(Cell);
+            }
+
+            /* Assign the turn to Player 1 and initialize number of free Cells */
+            turn = 1;
+            vacant_Cells = 9;
+            if (evenPlays) shift_Change();
+        }
+
+        else if (view.getId() == button_Settings.getId()) {
             Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
             startActivity(startSettingsActivity);
-            return;
-        }
-        number_Of_Players = 1;
-        if (view.getId() == button_2_Player.getId()) number_Of_Players = 2;
 
-        /* Disable buttons and radio buttons */
-        enabled_buttons(false);
-
-        /* For all the Cells
-         * set the owner to 0
-         * set the value to 0
-         * and  put the correct back to the cell  */
-        for (Cell Cell : gameBoard) {
-            Cell.setOwner(0);
-            setColorToCell(Cell);
-        }
-
-        /* Assign the turn to Player 1 and initialize number of free Cells */
-        turn = 1;
-        vacant_Cells = 9;
-        if (evenPlays) shift_Change();
+        } else playerClickACell(view);
     }
 
     /**
      * Set color to the BackgroundColor of the ImageView of the cell
      * Get the color of the cell owner player
+     *
      * @param cell es la celda de tablero que queremos colorear
      */
     public void setColorToCell(Cell cell) {
@@ -315,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
      * the game is terminated. turn is set to 0 and the buttons are Enabled
      */
     public void vacantCells() {
-        vacant_Cells --;
+        vacant_Cells--;
         if (vacant_Cells < 1) {
             vacant_Cells = 0;
             turn = 0;
@@ -435,7 +443,8 @@ public class MainActivity extends AppCompatActivity {
                     if (number > 1) {
                         cell = value;
                         value.setOwner(0);
-                        return cell;
+                        break;
+                        //return cell;
                     }
                     value.setOwner(0);
                 }

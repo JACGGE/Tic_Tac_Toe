@@ -4,7 +4,9 @@
     <!-- - - - - - - - - - - -->
     <!--Used by Preferences  -->
     <!-- - - - - - - - - - - -->
+
     <string name="settings">Settings</string>
+    <string name="ButtonText" translatable="false">S</string>
 
 
     <string name="Owner" translatable="false">"OWNER"</string>
@@ -54,6 +56,6 @@
     <string name="impossible_difficulty">Hard</string>
 
     <!-- Texts for code -->
-    <string name="winner">THE WINNER IS... </string>
+    <string name="winner">THE WINNER IS </string>
 </resources>
 

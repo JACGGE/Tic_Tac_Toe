@@ -27,8 +27,9 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/id_butoon_1player"
+            android:id="@+id/id_button_1player"
             style="@style/Buttons"
+            android:onClick="onClick"
             android:text="@string/Player1" />
 
         <LinearLayout
@@ -37,13 +38,14 @@
              android:orientation="horizontal">
 
             <Button
-                android:id="@+id/id_butoonS"
+                android:id="@+id/id_buttonS"
+                style="@style/Buttons"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center_vertical"
-                android:text="S"
-                style="@style/Buttons"
-                android:textSize="10sp"/>
+                android:onClick="onClick"
+                android:text="@string/ButtonText"
+                android:textSize="12sp" />
 
             <RadioGroup
             android:id="@+id/buttonS"
@@ -53,19 +55,19 @@
 
             <RadioButton
                 android:id="@+id/id_radio_button_easy_difficulty"
-                style="@style/RadioButon"
+                style="@style/RadioButton"
                 android:checked="true"
                 android:text="@string/easy_difficulty" />
 
             <RadioButton
                 android:id="@+id/id_radio_button_medium_difficulty"
-                style="@style/RadioButon"
+                style="@style/RadioButton"
                 android:checked="false"
                 android:text="@string/medium_difficulty" />
 
             <RadioButton
                 android:id="@+id/id_radio_button_impossible_difficulty"
-                style="@style/RadioButon"
+                style="@style/RadioButton"
                 android:checked="false"
                 android:text="@string/impossible_difficulty" />
 
@@ -73,8 +75,9 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/id_butoon_2players"
+            android:id="@+id/id_button_2players"
             style="@style/Buttons"
+            android:onClick="onClick"
             android:text="@string/Player2" />
 
     </LinearLayout>
@@ -82,69 +85,88 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
         android:layout_weight="4"
+        android:background="@color/colorFondo"
         android:paddingBottom="10dp">
 
 
         <GridLayout
             android:id="@+id/id_grid"
-            android:background="@color/colorFondoGrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorFondoGrid"
             android:columnCount="3"
             android:rowCount="3">
 
             <ImageView
                 android:id="@+id/id_iv_a1"
+                android:contentDescription="@string/app_name"
                 style="@style/Image"
                 android:background="#FF0000"
+                android:onClick="onClick"
                 android:tag="0" />
-                <!--En las tag almacenamos indice de Cell (0-9)-->
+            <!--En las tag almacenamos índice de Cell (0-9)-->
 
             <ImageView
                 android:id="@+id/id_iv_a2"
+                android:contentDescription="@string/app_name"
                 style="@style/Image"
+                android:onClick="onClick"
                 android:tag="1" />
 
             <ImageView
                 android:id="@+id/id_iv_a3"
+                android:contentDescription="@string/app_name"
                 style="@style/Image"
                 android:background="#FF0000"
+                android:onClick="onClick"
                 android:tag="2" />
 
             <ImageView
                 android:id="@+id/id_iv_b1"
+                android:contentDescription="@string/app_name"
                 style="@style/Image"
+                android:onClick="onClick"
                 android:tag="3" />
 
             <ImageView
                 android:id="@+id/id_iv_b2"
+                android:contentDescription="@string/app_name"
                 style="@style/Image"
+                android:onClick="onClick"
                 android:tag="4" />
 
             <ImageView
                 android:id="@+id/id_iv_b3"
+                android:contentDescription="@string/app_name"
                 style="@style/Image"
+                android:onClick="onClick"
                 android:tag="5" />
 
             <ImageView
                 android:id="@+id/id_iv_c1"
+                android:contentDescription="@string/app_name"
                 style="@style/Image"
+                android:onClick="onClick"
                 android:tag="6" />
 
             <ImageView
                 android:id="@+id/id_iv_c2"
+                android:contentDescription="@string/app_name"
                 style="@style/Image"
                 android:background="#FF0000"
+                android:onClick="onClick"
                 android:tag="7" />
 
             <ImageView
                 android:id="@+id/id_iv_c3"
+                android:contentDescription="@string/app_name"
                 style="@style/Image"
                 android:background="#FF0000"
+                android:onClick="onClick"
                 android:tag="8" />
 
         </GridLayout>

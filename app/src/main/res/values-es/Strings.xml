@@ -27,10 +27,10 @@
     <string name="Title">TRES EN RAYA</string>
     <string name="Player1">1 Player</string>
     <string name="Player2">2 Player</string>
-    <string name="easy_difficulty">Facil</string>
+    <string name="easy_difficulty">Fácil</string>
     <string name="medium_difficulty">Normal</string>
-    <string name="impossible_difficulty">Dificil</string>
+    <string name="impossible_difficulty">Difícil</string>
 
     <!-- Texts for code -->
-    <string name="winner">EL GANADOR ES... </string>
+    <string name="winner">EL GANADOR ES </string>
 </resources>

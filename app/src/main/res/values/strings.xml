@@ -56,6 +56,6 @@
     <string name="impossible_difficulty">Hard</string>
 
     <!-- Texts for code -->
-    <string name="winner">THE WINNER IS </string>
+    <string name="winner">THE WINNER IS .. </string>
 </resources>
 

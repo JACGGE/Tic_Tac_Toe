@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // ECHO Icono hacerlo y ponerlo
     // ECHO Landscape pantalla
     // ECHO Preferencias
-    // ECHO Poner el icono de settins en el button
+    // ECHO Poner el icono de settings en el button
     // TODO Sound
     // TODO Start-Up pantalla
     // TODO Inteligencia Artificial

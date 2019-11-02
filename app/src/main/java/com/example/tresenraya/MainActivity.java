@@ -20,24 +20,18 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Objects;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    // ECHO Icono hacerlo y ponerlo
-    // ECHO Landscape pantalla
-    // ECHO Preferencias
-    // ECHO Poner el icono de settings en el button
-    // TODO Sound
-    // TODO Start-Up pantalla
-    // TODO Inteligencia Artificial
-    // TODO WIFI 2 Players
-    // TODO Ingles comentarios
+   DatabaseReference firebase;
 
-    /*
-       Create variables to reference the Views
-    */
+   // Create variables to reference the Views
+
     private Button button_1_Player,
             button_2_Player,
             button_Settings;
@@ -45,24 +39,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             radioButton_Medium,
             radioButton_Hard;
 
-    /*
-       Create Object array of the cell class
-     */
+    // Create Object array of the cell class
     private Cell[] gameBoard = new Cell[9];
 
-    /*
-       Create Object array of the SetOfCells class
-     */
+    // Create Object array of the PhotoFame class
+    PhotoGame[] photoGame = new PhotoGame[9];
+
+    // Create Object array of the SetOfCells class
     private SetOfCells[] winnerSets = new SetOfCells[8];
 
-    /*
-       Create Object array of the Player class
-     */
+    // Create Object array of the Player class
     private SetPlayers setPlayers;
 
-    /*
-       Internal use variables
-     */
+    // Internal use variables
     private int number_Of_Players;      // Number the human players (no android) of the game in use
     private int turn = 0;               // We start with turn "0" (nobody can play) (0-1-2)
     private boolean evenPlays = false;  // When evenPlays, start Player 2 or android-player
@@ -75,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        firebase = FirebaseDatabase.getInstance().getReference("Jugadas");
 
         /*
          We match the variables to the corresponding View
@@ -128,30 +119,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          */
         String[] nameOfPayer = getResources().getStringArray(R.array.namePlayer);
         String[] colorOfPlayer = getResources().getStringArray(R.array.colorOfPlayer);
-        //for (int n = 0; n < setPlayers.length; n++)
-        //    setOfPlayers[n] = new Player(nameOfPayer[n], colorOfPlayer[n]);
         Player player1 = new Player(nameOfPayer[0], colorOfPlayer[0]);
         Player player2 = new Player(nameOfPayer[1], colorOfPlayer[1]);
         Player player3 = new Player(nameOfPayer[2], colorOfPlayer[2]);
         setPlayers = new SetPlayers(player1, player2, player3);
 
-        /*
-          Recharge of variables and arrays when returning from a deletion due to UI change
-         */
-        if (savedInstanceState != null) {
-            onResume();                                               // To recharge Preferences */
-            int[] ArrayOwner = savedInstanceState.getIntArray(getString(R.string.Owner));
-            for (int n = 0; n < 9; n++) {
-                gameBoard[n].setOwner(ArrayOwner != null ? ArrayOwner[n] : 0);
-                setColorToCell(gameBoard[n]);
-            }
-            enabled_buttons(savedInstanceState.getBoolean
-                    (getString(R.string.IsButtonsEnabled), true));
-            number_Of_Players = savedInstanceState.getInt
-                    (getString(R.string.NumberOfPlayers), 1);
-            turn = savedInstanceState.getInt(getString(R.string.turn), 1);
-            vacant_Cells = savedInstanceState.getInt(getString(R.string.VacantCells), 9);
-        }
+        restoreInstanceState(savedInstanceState);
     }
 
     /**
@@ -170,7 +143,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         outState.putBoolean(getString(R.string.IsButtonsEnabled), button_1_Player.isEnabled());
         outState.putInt(getString(R.string.NumberOfPlayers), number_Of_Players);
         outState.putInt(getString(R.string.turn), turn);
+        outState.putBoolean(getString(R.string.evenPlays), evenPlays);
         outState.putInt(getString(R.string.VacantCells), vacant_Cells);
+    }
+
+    protected void restoreInstanceState(Bundle savedInstanceState) {
+       /*
+          Restore variables and arrays when returning from a deletion due to UI change
+         */
+        if (savedInstanceState != null) {
+            onResume();                                               // To recharge Preferences */
+            int[] ArrayOwner = savedInstanceState.getIntArray(getString(R.string.Owner));
+            for (int n = 0; n < 9; n++) {
+                gameBoard[n].setOwner(ArrayOwner != null ? ArrayOwner[n] : 0);
+                setColorToCell(gameBoard[n]);
+            }
+            enabled_buttons(savedInstanceState.getBoolean
+                    (getString(R.string.IsButtonsEnabled), true));
+            number_Of_Players = savedInstanceState.getInt
+                    (getString(R.string.NumberOfPlayers), 1);
+            turn = savedInstanceState.getInt(getString(R.string.turn), 1);
+            evenPlays = savedInstanceState.getBoolean(getString(R.string.evenPlays), true);
+            vacant_Cells = savedInstanceState.getInt(getString(R.string.VacantCells), 9);
+        }
     }
 
     @Override
@@ -192,9 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
-        /*
-         Retrieve preferences on setOfPlayers arrays [?]
-        */
+        //Retrieve preferences on setOfPlayers arrays [?]
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         setPlayers.setName(sharedPreferences.getString
@@ -214,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-         if (view.getId() == button_1_Player.getId() || view.getId() == button_2_Player.getId()) {
+        if (view.getId() == button_1_Player.getId() || view.getId() == button_2_Player.getId()) {
             number_Of_Players = 1;
             if (view.getId() == button_2_Player.getId()) number_Of_Players = 2;
 
@@ -233,13 +226,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             /* Assign the turn to Player 1 and initialize number of free Cells */
             turn = 1;
             vacant_Cells = 9;
-            if (evenPlays) shift_Change();
-        }
-
-        else if (view.getId() == button_Settings.getId()) {
+            if (evenPlays) turnChange();
+        } else if (view.getId() == button_Settings.getId()) {
             Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
             startActivity(startSettingsActivity);
-
         } else playerClickACell(view);
     }
 
@@ -283,8 +273,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Cell.setOwner(turn);
         setColorToCell(Cell);
         checkIfThereIsAWinner();
-        vacantCells();
-        shift_Change();
+        updateVacantCells();
+        turnChange();
     }
 
     /**
@@ -322,7 +312,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Once subtracted 1, if the number of cells without owner is less than 1
      * the game is terminated. turn is set to 0 and the buttons are Enabled
      */
-    public void vacantCells() {
+    public void updateVacantCells() {
+        if (vacant_Cells > 0) photoGameToArray();
+        if (vacant_Cells == 1) photoGameArrayToFireBase(0);
         vacant_Cells--;
         if (vacant_Cells < 1) {
             vacant_Cells = 0;
@@ -335,12 +327,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Procedure to change the turn after each play
      */
-    public void shift_Change() {
+    public void turnChange() {
         if (turn != 0) {
             turn++;
             if (turn > 2) turn = 1;
             if (turn == 2 && number_Of_Players == 1) androidPlay();
         }
+    }
+
+    public void photoGameArrayToFireBase(int winner) {
+        for (int n = 0; n < (10 - vacant_Cells); n++) {
+            photoGame[n].setWinner(winner);
+            String id = firebase.push().getKey();
+            assert id != null;
+            firebase.child(id).setValue(photoGame[n]);
+
+        }
+        for (int n = 0;n < photoGame.length; n++) photoGame[n] = null;
+    }
+
+    public void photoGameToArray() {
+        //if (vacant_Cells > 8)return;
+        int gameBoardInt = getGameBoardInt();
+        int playNumber = 9 - vacant_Cells;
+        photoGame[playNumber] = new PhotoGame(gameBoardInt, turn);
+    }
+
+    public int getGameBoardInt() {
+        String gameBoardBinLow = "";
+        String gameBoardBinHigh = "";
+        for (Cell cell : gameBoard) {
+            switch (cell.getOwner()) {
+                case 1:
+                    gameBoardBinLow = "1".concat(gameBoardBinLow);
+                    gameBoardBinHigh = "0".concat(gameBoardBinHigh);
+                    break;
+                case 2:
+                    gameBoardBinLow = "0".concat(gameBoardBinLow);
+                    gameBoardBinHigh = "1".concat(gameBoardBinHigh);
+                    break;
+                default:
+                    gameBoardBinLow = "0".concat(gameBoardBinLow);
+                    gameBoardBinHigh = "0".concat(gameBoardBinHigh);
+                    break;
+            }
+        }
+        return Integer.parseInt(gameBoardBinHigh + gameBoardBinLow, 2);
     }
 
     /**
@@ -352,7 +384,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (set.getSum() == (player * player) * 3) {
                     Toast.makeText(this, getString(R.string.winner) +
                             setPlayers.getName(player), Toast.LENGTH_LONG).show();
-                    vacant_Cells = 0;
+                    photoGameToArray();
+                    photoGameArrayToFireBase(turn);
+                    vacant_Cells = -1;
                 }
     }
 
@@ -425,7 +459,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         cell = arraySet.getCell(m);
         return cell;
     }
-
 
     /**
      * Method to return a cell in two combinations with only one android-owner and the same vacant.

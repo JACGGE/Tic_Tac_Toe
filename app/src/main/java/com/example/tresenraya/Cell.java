@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 J.A.
+ * Copyright (C) 2019 J.A.Cucurull
  * All rights reserved
  *
  * Cell Class
@@ -48,5 +48,6 @@ public class Cell {
     int getWeight() {
         return mWeight;
     }
+
 }
 

@@ -12,8 +12,9 @@
     <string name="Owner" translatable="false">"OWNER"</string>
     <string name="Value" translatable="false">"VALUE"</string>
     <string name="IsButtonsEnabled" translatable="false">"IS_BUTTONS_ENABLED"</string>
-    <string name="NumberOfPlayers" translatable="false">"number_Of_Players"</string>
-    <string name="turn" translatable="false">"turn"</string>
+    <string name="NumberOfPlayers" translatable="false">"NUMBER_OF_PLAYERS"</string>
+    <string name="turn" translatable="false">"TURN"</string>
+    <string name="evenPlays" translatable="false">"EVEN"</string>
     <string name="VacantCells" translatable="false">"VACANT_CELLS"</string>
 
     <string name="Pla1_color_for">. . . color for Player 1</string>

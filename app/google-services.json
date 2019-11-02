@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "338756537277",
-    "firebase_url": "https://tictac-f4f1c.firebaseio.com",
-    "project_id": "tictac-f4f1c",
-    "storage_bucket": "tictac-f4f1c.appspot.com"
+    "project_number": "772961172228",
+    "firebase_url": "https://tictactoe-2134f.firebaseio.com",
+    "project_id": "tictactoe-2134f",
+    "storage_bucket": "tictactoe-2134f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:338756537277:android:530c66b2387b92fc3860d4",
+        "mobilesdk_app_id": "1:772961172228:android:841fc496e9d48fe360ee51",
         "android_client_info": {
           "package_name": "com.example.tresenraya"
         }
       },
       "oauth_client": [
         {
-          "client_id": "338756537277-c9rvlkasftrifg78a25l6jmbvjid38t4.apps.googleusercontent.com",
+          "client_id": "772961172228-0hu517mmmspvvsaf4hlnfgnjeoa5c4tn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tresenraya",
+            "certificate_hash": "6ad3a1713405767372692dc60d59766f1cd363db"
+          }
+        },
+        {
+          "client_id": "772961172228-2cukpo5dae7ob0d8qfrrk4ntsususoda.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBcvCwuEFGkG_n5-z3bzmmKdQ-xsF1pT4M"
+          "current_key": "AIzaSyC82Fgvp68UTEy6A-OXbSx24b7iFj30Bvw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "338756537277-c9rvlkasftrifg78a25l6jmbvjid38t4.apps.googleusercontent.com",
+              "client_id": "772961172228-2cukpo5dae7ob0d8qfrrk4ntsususoda.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

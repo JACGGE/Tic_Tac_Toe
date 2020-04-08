@@ -124,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Player player3 = new Player(nameOfPayer[2], colorOfPlayer[2]);
         setPlayers = new SetPlayers(player1, player2, player3);
 
+        /*
+          call restore variables and arrays when returning from a deletion due to UI change
+         */
         restoreInstanceState(savedInstanceState);
     }
 
@@ -148,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     protected void restoreInstanceState(Bundle savedInstanceState) {
-       /*
+        /*
           Restore variables and arrays when returning from a deletion due to UI change
          */
         if (savedInstanceState != null) {
@@ -418,7 +421,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Method to return the cell that would make the player winner 1
+     * Method to return the cell that would make the player 1 winner
      */
     // For all modes
     public Cell searchForPlayer1Winner() {

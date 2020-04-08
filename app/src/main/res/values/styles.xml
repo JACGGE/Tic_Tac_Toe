@@ -7,7 +7,7 @@
     </style>
     -->
     <style name="AppTheme"
-        parent="Theme.AppCompat">
+        parent="@style/Theme.AppCompat.NoActionBar">
     </style>
 
     <style name="Buttons">

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
    DatabaseReference firebase;
 
-   // Create variables to reference the Views
+   // Create  variables to reference the Views
 
     private Button button_1_Player,
             button_2_Player,

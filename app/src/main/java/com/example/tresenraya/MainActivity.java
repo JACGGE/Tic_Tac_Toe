@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
 
@@ -198,9 +199,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setPlayers.setName(sharedPreferences.getString
                 (getString(R.string.Pla2_name_key), "No leído"), 2);
         String[] colorOfPlayer = getResources().getStringArray(R.array.colorOfPlayer);
-        setPlayers.setColor(colorOfPlayer[Integer.valueOf(Objects.requireNonNull
+        setPlayers.setColor(colorOfPlayer[Integer.parseInt(Objects.requireNonNull
                 (sharedPreferences.getString(getString(R.string.Pla1_color_key), "1")))], 1);
-        setPlayers.setColor(colorOfPlayer[Integer.valueOf(Objects.requireNonNull
+        setPlayers.setColor(colorOfPlayer[Integer.parseInt(Objects.requireNonNull
                 (sharedPreferences.getString(getString(R.string.Pla2_color_key), "2")))], 2);
     }
 
@@ -288,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     public void playerClickACell(View view) {
         if (turn != 0) {
-            int index = Integer.valueOf(view.getTag().toString());
+            int index = Integer.parseInt(view.getTag().toString());
             playerSelectCell(gameBoard[index]);
         }
     }
@@ -346,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             firebase.child(id).setValue(photoGame[n]);
 
         }
-        for (int n = 0;n < photoGame.length; n++) photoGame[n] = null;
+        Arrays.fill(photoGame, null);
     }
 
     public void photoGameToArray() {

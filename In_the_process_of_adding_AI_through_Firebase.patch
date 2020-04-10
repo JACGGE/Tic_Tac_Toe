@@ -1,0 +1,35 @@
+Index: app/src/main/java/com/example/tresenraya/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/tresenraya/MainActivity.java	(revision 4a894ce9ba4ebbf33fcd13d6cceaa22f813637bc)
++++ app/src/main/java/com/example/tresenraya/MainActivity.java	(date 1572696931197)
+@@ -124,6 +124,9 @@
+         Player player3 = new Player(nameOfPayer[2], colorOfPlayer[2]);
+         setPlayers = new SetPlayers(player1, player2, player3);
+ 
++        /*
++          call restore variables and arrays when returning from a deletion due to UI change
++         */
+         restoreInstanceState(savedInstanceState);
+     }
+ 
+@@ -148,7 +151,7 @@
+     }
+ 
+     protected void restoreInstanceState(Bundle savedInstanceState) {
+-       /*
++        /*
+           Restore variables and arrays when returning from a deletion due to UI change
+          */
+         if (savedInstanceState != null) {
+@@ -418,7 +421,7 @@
+     }
+ 
+     /**
+-     * Method to return the cell that would make the player winner 1
++     * Method to return the cell that would make the player 1 winner
+      */
+     // For all modes
+     public Cell searchForPlayer1Winner() {

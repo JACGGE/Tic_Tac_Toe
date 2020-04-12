@@ -30,6 +30,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
    DatabaseReference firebase;
+   //==
    // Create variables to reference the Views
 
     private Button button_1_Player,

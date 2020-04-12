@@ -3,6 +3,7 @@
  * Copyright (C) 2019
  * All rights reserved
  *
+ *
  * MainActivity Class
  * Exceptionally developed for training and sample purposes
  */

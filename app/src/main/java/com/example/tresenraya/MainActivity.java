@@ -2,8 +2,6 @@
  * J.A.Cucurull
  * Copyright (C) 2019
  * All rights reserved
- *
- *
  * MainActivity Class
  * Exceptionally developed for training and sample purposes
  */
@@ -33,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
    DatabaseReference firebase;
    // Create variables to reference the Views
-
     private Button button_1_Player,
             button_2_Player,
             button_Settings;
@@ -509,4 +506,3 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return cell;
     }
 }
-

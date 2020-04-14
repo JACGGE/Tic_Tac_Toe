@@ -1,0 +1,15 @@
+Index: app/src/main/java/com/example/tresenraya/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/tresenraya/MainActivity.java	(date 1586722034000)
++++ app/src/main/java/com/example/tresenraya/MainActivity.java	(date 1586725715894)
+@@ -30,6 +30,7 @@
+ public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+ 
+    DatabaseReference firebase;
++   //==
+    // Create variables to reference the Views
+ 
+     private Button button_1_Player,

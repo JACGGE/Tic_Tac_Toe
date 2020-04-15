@@ -1,6 +1,6 @@
 /*
  * J.A.Cucurull
- * Copyright (C) 2020 -
+ * Copyright (C) 2020 -=
  * All rights reserved
  * MainActivity Class
  * Exceptionally developed for training and sample purposes
